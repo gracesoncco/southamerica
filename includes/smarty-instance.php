@@ -3,9 +3,7 @@
 include_once (INCLUDE_PATH . 'smarty/Smarty.class.php'); 
 
 class TawaSmarty extends Smarty {
-	function TawaSmarty() {
-		$this->__construct();
-	}
+
 	function __construct() {
 		$this->template_dir = THEME_PATH . get_current_theme() . '/templates';
 		$this->compile_dir = INCLUDE_PATH . "smarty/templates_c";
