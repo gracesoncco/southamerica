@@ -1,0 +1,13 @@
+<h1>{gt s = 'News'}</h1>
+{if $news}
+{section name=ne loop=$news}
+<h2><a href="{$baseurl}news-{$news[ne].link}.html?lang={$lang}">{$news[ne].name}</a></h2>
+<p class="tour-type">{$news[ne].pdate|date_format:"%b %e, %Y %H:%M:%S"}</p>
+<p>
+{$news[ne].resume}
+</p><p><a href="{$baseurl}news-{$news[ne].link}.html?lang={$lang}">{gt s = 'More'} &rarr;</a></p>
+{/section}
+{include file="adm/paginator.html"}
+{else}
+<p>{gt s = 'News doesn\'t exist'}</p>
+{/if}

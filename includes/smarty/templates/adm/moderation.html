@@ -1,0 +1,59 @@
+<script type="text/javascript">
+{literal}
+window.addEvent('load', function () {
+	$S('#selection a').action({
+		onclick: function () {
+			var sel = this.id[4];
+			
+			$S('#spam-list input').action({
+				initialize: function() {
+			       this.checked = parseInt(sel);
+			   }			   
+			});
+		}			
+	});
+})
+{/literal}
+</script>
+
+
+<form method="post" action="{$self}">
+<fieldset class="datadetail">
+
+<p>
+<input type="submit" name="approve" value="{gt s = 'No es spam'}" />
+<input type="submit" name="delete" value="{gt s = 'Borrar seleccionados'}" />
+<input type="submit" name="delete-all" value="{gt s = 'Borrar todo'}" />
+</p>
+
+<p id="selection">
+	<a href="#" id="all_1">Seleccionar Todo</a> / <a href="#" id="all_0">Quitar seleccion</a>
+</p>
+
+<ol id="spam-list" class="commentlist">
+{section name=cm loop=$comments}
+<li class="comment-box">
+	<div class="{cycle values="comment,alternate"}">
+		<p class="comment_meta" id="comment-{$comments[cm].commentid}">
+		<strong>{gt s = 'Nombre'}</strong>: {$comments[cm].name} |
+		<strong>{gt s = 'E-mail'}</strong>: {$comments[cm].email} |
+		<strong>{gt s = 'Tour'}</strong>: {$comments[cm].tour_name} |
+		<strong>{gt s = 'Fecha'}</strong>: {$comments[cm].pdate|date_format:"%d/%m/%Y"}
+		</p>
+		
+		{$comments[cm].description}
+		
+		<p><label class="noblock" for="spam-{$comments[cm].commentid}"><input type="checkbox" id="spam-{$comments[cm].commentid}" name="comments[]" value="{$comments[cm].commentid}" />
+			No es spam</label></p>
+	</div>
+</li>
+{sectionelse}
+	<li>{gt s='Debe ser su día de suerte, no hay ningún comentario para moderar.'}</li>
+{/section}	
+</ol>
+
+</fieldset>
+
+</form>
+
+{include file="adm/paginator.html"}

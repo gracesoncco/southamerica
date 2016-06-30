@@ -1,0 +1,3 @@
+Theme Name: Illay
+Description: Tema por defecto de Illay
+Author: Tawa Team

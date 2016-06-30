@@ -1,0 +1,119 @@
+<div class="datadetail">
+<form action="{$self}" method="post" id="your-profile" name="frm" onsubmit="return v.exec()">
+	{if $msg}{$msg|wrap}{/if}
+	<fieldset>
+		<legend>{gt s='Datos Personales'}</legend>
+		<p><label for="name" id="lname">{gt s = 'Nombre'}:</label> <br />
+		<input type="text" name="name" id="name" value="{$user.name}" size="40" maxlength="200" /></p>
+		<p><label for="email" id="lemail">{gt s = 'E-Mail'}:</label> <br />
+		<input type="text" name="email" id="email" value="{$user.email}" size="40" maxlength="100" {if $user}readonly="readonly"{/if} />
+		</p>
+		<p><label for="country_code">{gt s = 'País'}:</label> <br />
+		<select name="country_code" id="country_code">
+			{html_options options=$countries selected=$user.country_code}
+		</select>
+		</p>
+	</fieldset>
+	<fieldset>
+		<legend>{gt s = 'Información del Sistema'}</legend>
+		<p><label for="pwd" id="lpwd">{gt s = 'Contraseña'}:</label> <br /> 
+		<input type="password" name="pwd" id="pwd" size="20" maxlength="15" /></p>
+		<p><label for="pwd2" id="lpwd2">{gt s = 'Repite tu contraseña'}:</label> <br />
+		<input type="password" name="pwd2" id="pwd2" size="20" maxlength="15" /></p>
+		<p><label for="usertype">{gt s = 'Tipo'}:</label><br /> 
+		<select name="usertype" id="usertype">
+			{html_options options=$usertypes selected=$user.usertype}
+		</select>
+		</p>
+		<p><label for="active">{gt s = 'Usuario activo?'}:</label> <br />
+		<select name="active" id="active">
+			{html_options options=$status selected=$user.active}
+		</select>
+		</p>		
+	</fieldset>
+	<div class="clear"></div>
+	<p class="submit">
+		<input type="submit" name="save" id="save" value="{gt s = 'Guardar Usuario'}" class="bold" />
+		{if $user && $user.userid != 1}
+		<input type="submit" name="remove" id="remove" value="{gt s = 'Eliminar Usuario'}" onclick="return confirm_msg();" />
+		{/if}
+		<input type="hidden" name="action" id="action" value="{$action}" />
+		<input type="hidden" name="id" id="id" value="{$user.userid}" />
+		{form_token action=update-user}
+	</p>	
+</form>
+</div>
+{if $user}
+<div class="datadetail">
+	<p class="updated">{gt s = 'Dejar los campos en blanco si no vas a cambiar la contraseña'}</p>
+</div>
+{/if}
+<script type="text/javascript">
+	document.getElementById('name').focus();
+	{literal}
+	var a_fields = {
+		'name': {
+			{/literal}
+			'l': '{gt s = 'Nombre'}',  // label
+			{literal}
+			'r': true,    // required
+			't': 'lname',   // id of the element to highlight if input not validated
+			'mn': 2
+		},
+	{/literal}
+	{if !$user}
+	{literal}
+		'email': {
+			{/literal}
+			'l': '{gt s = 'E-Mail'}',  // label
+			{literal}
+			'r': true,    // required
+			'f': 'email',  // format (see below)
+			't': 'lemail',   // id of the element to highlight if input not validated
+			'mn': 4
+		},
+	{/literal}
+	{/if}
+	{literal}	
+		'pwd': {
+			{/literal}
+			'l': '{gt s = 'Contraseña'}',  // label
+			{literal}
+	{/literal}
+		{if !$user}
+			'r': true,    // required
+			'mn': 4,
+		{/if}
+	{literal}
+			'f': 'alphanum',  // format (see below)
+			't': 'lpwd',   // id of the element to highlight if input not validated
+			'm' : 'pwd2'
+		},
+		
+		'pwd2': {
+			{/literal}
+			'l': '{gt s = 'Repite la contraseña'}',  // label
+			{literal}
+	{/literal}
+		{if !$user}
+			'r': true,    // required
+			'mn': 4,
+		{/if}
+	{literal}
+			'f': 'alphanum',  // format (see below)
+			't': 'lpwd2'   // id of the element to highlight if input not validated
+		}
+		
+	},
+	o_config = {
+		'to_disable' : ['save'],
+		'alert' : 0
+	}
+	var v = new validator('frm', a_fields, o_config);
+	
+	copyfield = function(p, q) {
+		document.getElementById(q).value = document.getElementById(p).value;
+		return false;
+	}
+	{/literal}
+</script>

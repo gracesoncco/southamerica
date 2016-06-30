@@ -1,0 +1,28 @@
+{if $msg}{$msg|wrap}{/if}
+
+<div style="overflow:auto;">
+<h2>{gt s='Tema actual'}</h2>
+
+<div id="currenttheme">
+
+	<img src="{$current_theme.Url}screenshot.png" />
+	<h3>{$current_theme.Name} {gt s='por'} {$current_theme.Author}</h3>
+	
+	{$current_theme.Description}
+
+</div>
+
+<h2>{gt s='Temas disponibles'}</h2>
+
+{section name=n loop=$themes}
+<div class="available-theme">
+	<h3><a href="{$self}?action=activate&amp;template={$themes[n].Template}&amp;{form_token type=url action=template}">{$themes[n].Name}</a></h3>
+	
+	<a href="{$self}?action=activate&amp;template={$themes[n].Template}&amp;{form_token type=url action=template}" class="screenshot">
+		<img src="{$themes[n].Url}screenshot.png" />
+	</a>
+	
+	{$themes[n].Description}
+</div>
+{/section}
+</div>

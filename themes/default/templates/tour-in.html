@@ -1,0 +1,23 @@
+{if $destination.description!=''}
+<h1 id="infode"><a href="{$baseurl}{$destination.link}-information.{$lang}.html">{$destination.name}</a></h1>
+{if $pics}
+<div id="tour-meta">
+	<div id="tour-pictures">
+	<p class="thumbpicitem">
+		<a href="{$picsurl}normal_{$pics[0].picname}" title="{$pics[0].name}" rel="lightbox1" class="effectable"><img src="{$picsurl}thumb_{$pics[0].picname}" alt="{$pics[0].name}" /></a><br />
+		{$pics[0].name}
+	</p>
+	</div>
+</div>
+{/if}
+<ul id="tofc">
+	<li><a href="#infode">{$destination.name}</a></li>
+	<li><a href="#tours-in">{gt s = 'Tours in'} {$destination.name}</a></li>
+</ul>
+{$destination.description}
+<p><a href="{$baseurl}{$destination.link}-information.{$lang}.html">{gt s = 'More'} &rarr;</a></p>
+<h1 id="tours-in">{gt s = 'Tours in'} {$destination.name}</h1>
+{else}
+<h1>{gt s = 'Tours in'} {$destination.name}</h1>
+{/if}
+{include file="tour-results.html"}

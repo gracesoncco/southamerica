@@ -1,0 +1,13 @@
+<ul id="adminmenu">
+{foreach from=$admin_menu item=item}
+   <li><a href="{$baseurl}adm/{$item.page}" {if $item.section && $item.section==$admin_item}class="current"{/if}>{$item.title}</a></li>
+{/foreach}
+</ul>
+
+{if $subitems}
+<ul id="submenu">	
+{foreach from=$subitems key=title item=page}
+	<li><a href="{$baseurl}adm/{$page}" {if $page==$sub_item}class="current"{/if}>{$title}</a></li>
+{/foreach}
+</ul>
+{/if}

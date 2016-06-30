@@ -1,0 +1,34 @@
+<fieldset id="lista" class="datadetail">
+	<fieldset>
+		<form name="pfrm" id="pfrm" action="{$self}" method="get">
+		<label for="t3" class="noblock">{gt s = 'Filtrar imágenes'}:</label>
+			<select name="t" id="t3">
+			{html_options options = $tpic selected = $t}
+			</select>
+			<input type="submit" name="psubmit" id="psubmit" value="{gt s = 'Mostrar'}" />
+		</form>
+		</fieldset>
+	
+	<ul id="image-gallery">
+	{section name=n loop=$pictures}
+		<li>
+			<a href="{$picsurl}normal_{$pictures[n].picname}" title="{$pictures[n].name}" rel="lightbox1">
+			<img src="{$picsurl}thumb_{$pictures[n].picname}" alt="{$pictures[n].name}" /></a><br />
+		<a href="{$page_name}.php?id={$pictures[n].picid}&amp;t={$pictures[n].pfor}" title="{gt s = 'Editar'} '{$pictures[n].name}'">{$pictures[n].name}</a>
+		<a href="{$self}?id={$pictures[n].picid}&amp;remove" title="{gt s = 'Eliminar'} '{$pictures[n].name}'" onclick="return confirm_msg();"><img src="{$media_url}admin/images/delete.png" alt="{$pictures[n].name}" class="nb" /></a>	
+		</li>
+	{sectionelse}
+		<li>{gt s = 'No hay imágenes'}</li>
+	{/section}
+	</ul>
+	
+</fieldset>
+
+{if $pictures}
+<div class="datadetail">
+<p class="updated">
+	{gt s = 'Haz click en la imágen para agrandar el tamaño.'}
+</p>
+</div>
+{/if}
+{include file="adm/paginator.html"}

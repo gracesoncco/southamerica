@@ -1,0 +1,16 @@
+<div id="devnews">
+
+<p>
+{gt s='Ver: '}
+<a href="{$self}">{gt s='Resúmenes'}</a>
+|
+<a href="{$self}?full">{gt s='Noticias completas'}</a>
+</p>
+
+{foreach from=$rss item=item}
+<div class="{cycle values="comment, alternate"}">
+	<h4><a href="{$item.link}">{$item.title}</a> &#8212; {$item.pubdate}</h4>
+	<p>{$item.description}</p>
+</div>
+{/foreach}
+</div>

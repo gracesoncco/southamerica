@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{$lang}" xml:lang="{$lang}">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="{$meta_tags}" />
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="{$theme_url}main.css" />
+	<link rel="stylesheet" type="text/css" media="print" href="{$theme_url}print.css" />
+	
+	<script type="text/javascript" src="{$media_url}js/moo.js"></script>
+	<script type="text/javascript" src="{$media_url}js/validator.js"></script>
+	<script type="text/javascript" src="{$media_url}js/generic.js"></script>
+	
+{if $lightbox}
+<link rel="stylesheet" type="text/css" media="screen" href="{$media_url}lightbox/lightbox.css" />
+<script type="text/javascript" src="{$media_url}js/lightbox_plus.js.php"></script>
+{/if}
+	
+<script type="text/javascript">
+{literal}	
+addLoadEvent(function (){ScrollLinks.start();
+$S('a.popup').action({onclick: function (evt) {
+props = this.rel ? this.rel : 'width=300,height=300';
+props += ',scrollbars=no,toolbar=no,location=no,directories=no,resizable=no';
+win = window.open(this.href, this.className, props);
+iz=(screen.width-win.document.body.clientWidth) / 2;
+de=(screen.height-win.document.body.clientHeight) / 2;
+win.moveTo(iz, de);
+win.focus();
+if (evt.preventDefault) evt.preventDefault();
+return false;
+}
+});
+});	
+{/literal}
+</script>
+	
+<link rel="shortcut icon" href="{$baseurl}favicon.ico" />
+<title>{$section_title}</title>
+</head>
+
+<body>
+<div id="main">
+
+<div id="hnav2">									
+{foreach from=$active_langs item=language}
+<li><a href="{rewrite_link func=template_normal_url data=index lang=$language.lang_code}">{$language.lang_name}</a></li>
+{/foreach}
+</div>	
+
+			
+
+<div id="header">
+<div id="hnav">
+<ul>
+<li><a href="{rewrite_link func=template_normal_url data=contact lang=$lang}">{gt s = 'Contact Us'}</a></li>
+<li><a href="{rewrite_link func=template_normal_url data=about lang=$lang}">{gt s = 'About Us'}</a></li>
+<li><a href="{rewrite_link func=template_normal_url data=tours lang=$lang}">{gt s = 'Tours'}</a></li>
+<li><a href="{rewrite_link func=template_normal_url data=destination lang=$lang}">{gt s = 'Destinations'}</a></li>
+<li><a href="{rewrite_link func=template_normal_url data=index lang=$lang}" title="{$site_name}">{gt s = 'Home'}</a></li>
+</ul>
+</div>
+
+<div id="logo">
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="780" height="260" align="right">
+                <param name="movie" value="/themes/default/images/header.swf" />
+                <param name="quality" value="high" />
+                <embed src="/themes/default/images/header.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="780" height="260"></embed>
+</object>
+</div>
+</div>
+	<div id="wrapper">
+	<div id="content">
+				{if $file}
+					{include file=$file}
+				{else}
+					{include file="home.html"}
+				{/if}
+			</div>
+	
+
+
+
+
+		</div>
+		hoka
+		<div id="nav">
+			{include file="nav.html"}
+		</div>
+		<div id="footer">
+			{include file="footer.html"}
+		</div>
+	</div>
+</body>
+</html>

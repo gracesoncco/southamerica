@@ -1,0 +1,27 @@
+#Deny from all
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [S=35]
+
+RewriteRule ^([a-z]{2})/search/(.+)$ tours.php?s=$2&lang=$1 [NC,QSA,L]
+RewriteRule ^gallery-(.+)\.([a-z]{2})\.html$ gallery.php?title=$1&lang=$2 [NC,QSA,L]
+RewriteRule ^contact-(.+)\.([a-z]{2})\.html$ contact.php?title=$1&lang=$2 [NC,QSA,L]
+RewriteRule ^tour-(.+)\.([a-zA-Z]{2})\.html?$ tour.php?title=$1&lang=$2 [QSA,L]
+
+RewriteRule ^book-(.+)\.([a-z]{2})\.html$ book.php?title=$1&lang=$2 [NC,QSA,L]
+RewriteRule ^recommend-(.+)\.([a-z]{2})\.html$ send-a-friend.php?title=$1&lang=$2 [NC,QSA,L]
+RewriteRule ^tours-in-(.+)\.([a-zA-Z]{2}).html?$ tours.php?title=$1&lang=$2&destination [QSA,L]
+RewriteRule ^(.+)-tour\.([a-zA-Z]{2}).html?$ tours.php?title=$1&lang=$2&tourtype [QSA,L]
+RewriteRule ^news-(.+).html?$ news-detail.php?title=$1 [QSA,L]
+RewriteRule ^(.+)-information.([a-zA-Z]{2}).html?$ destination-info.php?title=$1&lang=$2 [QSA,L]
+RewriteRule ^x-(.+)?$ x.php?paid=$1 [QSA,L]
+
+RewriteRule ^(.+)\.([a-z]{2})\.pdf pdf.php?title=$1&lang=$2 [NC,QSA,L]
+RewriteRule ^([a-z\d]+)\.([a-z]{2})\.html $1.php?lang=$2 [NC,QSA,L]
+
+</IfModule>
+ErrorDocument 404 /404.php

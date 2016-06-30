@@ -1,0 +1,13 @@
+<h1>{gt s = 'Links'}</h1>
+{if $links}
+{section name=li loop=$links}
+<p class="linkitem">
+{if $links[li].picname}
+<a href="{$links[li].link}" target="_blank"><img src="{$picsurl}normal_{$links[li].picname}"  alt="{$links[li].name}" class="imglink" /></a>
+{/if}
+<a href="{$links[li].link}" target="_blank"><strong>{$links[li].name}</strong></a>: {$links[li].description}</p>
+{/section}
+{include file="adm/paginator.html"}
+{else}
+<p>{gt s = 'Links doesn\'t exist'}</p>
+{/if}

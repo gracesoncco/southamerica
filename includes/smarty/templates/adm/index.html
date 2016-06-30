@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<link rel="stylesheet" href="{$media_url}admin/style.css" type="text/css" />
+	<script type="text/javascript" src="{$media_url}js/moo.js"></script>
+	<script type="text/javascript" src="{$media_url}js/generic.js"></script>
+	<script type="text/javascript" src="{$media_url}js/fat.js"></script>
+	<script type="text/javascript" src="{$media_url}js/validator.js"></script>
+	
+	{if $lightbox}
+	<link rel="stylesheet" type="text/css" media="screen" href="{$media_url}lightbox/lightbox.css" />
+	<script type="text/javascript" src="{$media_url}js/lightbox_plus.js.php"></script>
+	{/if}	
+	
+	{if $js}	
+	<script type="text/javascript" src="{$media_url}js/dbx.js"></script>
+	
+	<script type="text/javascript">
+	//<![CDATA[		
+	var cookie = '{$cookiename}';	
+	{literal}
+	function addLoadEvent(func) { // Does not work on
+		if ( typeof wpOnload != 'function' ) {
+			wpOnload = func;
+		} else {
+			var oldonload = wpOnload;
+			wpOnload = function() {
+	  			oldonload();
+	  			func();
+			}
+		}
+	}
+	//]]>
+	</script>
+	<style type="text/css">* html { overflow-x: hidden; }</style>
+	{/literal}
+	
+	<script type="text/javascript" src="{$media_url}js/dbx-key.js"></script>
+	{/if}
+	<link rel="shortcut icon" href="{$baseurl}favicon.ico" />
+	<title>{$section_title}</title>
+</head>
+<body>
+<div id="head">
+<h1>{$site_name|default:"Illay"} <span>(<a href="{$baseurl}">{gt s='Ver sitio &raquo;'}</a>)</span></h1>
+
+</div>
+<div id="user_info"><p>Hola, <strong>{$user.name}</strong>. [<a href="{$baseurl}logout.php" title="{gt s='Salir de esta cuenta'}">{gt s='Salir'}</a>, <a href="{$baseurl}account.php">{gt s='Mi Cuenta'}</a>] </p></div>
+
+{include file="adm/nav.html"}
+
+<div class="wrap">
+
+{if $section_title}
+	<h2>
+		{$section_title}
+		{if $lang_name}<span id="lang_name">[{$lang_name}]</span>{/if}
+		{if $has_tabs}		
+					<span id="innav">
+					( <a href="{$page_name}.php" id="new_item">{gt s = 'Nuevo'}</a> |
+					<a href="{if $has_tabs === 1}#lista{else}{$page_name}-list.php{/if}" id="list_item">{gt s = 'Ver lista'}</a> )
+					</span>
+		{/if}
+	</h2>
+{/if}
+
+{if $file}
+		{include file=$file}
+{else}
+		{include file="adm/intro.html"}
+{/if}
+				
+</div>
+
+{if $js}
+<script type="text/javascript">if (typeof wpOnload == 'function') wpOnload();</script>
+{/if}
+
+<div id="footer">
+	<p><a href="http://tawateam.com"><img src="{$media_url}admin/images/logo.gif" alt="Tawa Team Logo" title="Tawa Team" /></a></p>
+</div>
+
+</body>
+</html>

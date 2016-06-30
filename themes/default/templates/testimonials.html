@@ -1,0 +1,12 @@
+<h1>{gt s = 'Testimonials'}</h1>
+{if $testimonials}
+{section name=te loop=$testimonials}
+	<blockquote>
+		<p>{$testimonials[te].description}</p>
+	</blockquote>
+	<p class="author">- {$testimonials[te].name} <em>[{$testimonials[te].tdate|date_format:"%B, %Y"}]</em></p>
+{/section}
+{include file="adm/paginator.html"}
+{else}
+<p>{gt s = 'Testimonials doesn\'t exist'}</p>
+{/if}

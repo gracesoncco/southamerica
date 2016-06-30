@@ -1,0 +1,11 @@
+<h1>{$section_title|default:'Page not found'}</h1>
+<p>{gt s='Sorry, the page you are looking for might have been removed, had its name changed, or is temporarily unavailable.'}</p>
+{if $tours}
+<h2>{gt s='Related pages:'}</h2>
+<ul>
+{section name=n loop=$tours}
+	<li><a href="{rewrite_link func=template_tour_url lang=$lang data=$tours[n]}">{$tours[n].name}</a></li>
+{/section}
+</ul>
+{/if}
+<p><a href="{rewrite_link func=template_normal_url data=index lang=$lang}">{gt s='Go home'}</a>

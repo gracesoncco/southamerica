@@ -1,0 +1,35 @@
+<div class="datadetail">
+<p>{gt s='Ver los tours más visitados en'}: 
+{foreach from=$active_langs item=language}
+<a href="{$self}?lang={$language.lang_code}">{$language.lang_name}</a>
+{foreachelse}
+{gt s = 'Ops!, debería haber algún lenguaje'}
+{/foreach}</p>
+</div>
+
+<div class="datadetail">
+<table class="datalist" summary="{gt s = 'Tours List in'} {$lang_name}" id="lista">
+	<caption>{gt s = 'Lista de Tours'}</caption>
+	<thead>
+		<tr>
+			<th>{gt s = 'Nombre'}</th>
+			<th><a href="{$self}?comment={$comment_order}&amp;lang={$lang}">{gt s = 'N° Comentarios'}</a></th>
+			<th><a href="{$self}?visit={$visit_order}&amp;lang={$lang}">{gt s = 'N° Visitas'}</a></th>
+		</tr>
+	</thead>
+	<tbody>
+		{section name=n loop=$tours}
+		<tr class="{cycle values="tr01, tr02"}">
+			<td><a href="tour.php?id={$tours[n].tourid}" title="{gt s = 'Editar'} '{$tours[n].name}'">{$tours[n].name}</a></td>
+			<td>{$tours[n].comment_count}</td>
+			<td>{$tours[n].visit_count}</td>
+		</tr>		
+		{sectionelse}
+		<tr class="tr01">
+			<td colspan="3" class="acenter">{gt s = 'No hay datos que mostrar'}</td>
+		</tr>
+		{/section}
+	</tbody>
+</table>
+{include file="adm/paginator.html"}
+</div>

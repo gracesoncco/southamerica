@@ -1,0 +1,18 @@
+<form action="{$self}" method="post" name="frm" id="frm">
+	<fieldset class="datadetail">
+		<legend>{gt s = 'Idiomas activos e inactivos'}</legend>
+		{if $msg}{$msg|wrap}{/if}
+		{section name=n loop=$langs}
+		<input type="checkbox" name="llangs[]" id="lang_{$langs[n].lang_code}" value="{$langs[n].lang_code}" {if $langs[n].active}checked="checked"{/if} />
+		<label for="lang_{$langs[n].lang_code}" class="noblock">{$langs[n].lang_name}</label>
+		{/section}
+		<p class="submit">
+			<input type="submit" name="save" id="save" value="{gt s = 'Save'}" />
+			<input type="hidden" name="action" id="action" value="save" />
+		</p>
+	</fieldset>
+	<div class="datadetail">
+<p class="updated">
+{gt s = 'Los idiomas que están seleccionados están activos y por ende se puede completar información en esos idiomas. Al menos un idioma tiene que ser activado.'}</p>
+</div>
+</form>

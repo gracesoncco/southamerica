@@ -1,0 +1,34 @@
+<h1>
+	{$section_title}
+</h1>
+
+<ul id="accounttabs">
+		<li><a href="{rewrite_link func=template_normal_url data=account lang=$lang}">{gt s = 'My Information'}</a></li>
+	<li><a href="{rewrite_link func=template_normal_url data=utours lang=$lang}">{gt s = 'Tours'}</a></li>
+	<li><a href="{rewrite_link func=template_normal_url data=banners lang=$lang}" class="current">{gt s = 'Banners'}</a></li>
+	<li><a href="{rewrite_link func=template_normal_url data=logout lang=$lang}">{gt s = 'Logout'}</a></li>
+</ul>
+<table summary="Banners" class="banners">
+	<thead>
+		<tr>
+			<th class="acenter">Banner</th>
+		</tr>
+	</thead>
+	<tbody>
+		{section name=ba loop=$banners}
+		<tr class="{cycle values="tr01, tr02"}">
+			<th class="acenter">
+				<img src="{$baseurl}banners/{$banners[ba].f}" alt="Banner {$banners[ba].w}x{$banners[ba].h}" />
+				<textarea class="ohp" id="ban{$banners[ba].f}" rows="5" readonly="readonly" onfocus="if (typeof(document.layers) == 'undefined' || typeof(textarea_selected) == 'undefined') {ldelim}textarea_selected = 1; this.select();{rdelim}" style="display: none">&lt;p&gt;&lt;a href=&quot;{$baseurl}x-{$paid}&quot; title=&quot;{$site_name}&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;{$baseurl}banners/{$banners[ba].f}&quot; alt=&quot;{$site_name}&quot; style=&quot;border: 0&quot; /&gt;&lt;/a&gt;&lt;/p&gt;</textarea>
+				<p>{$banners[ba].w}x{$banners[ba].h} px [<a href="{$self}" onclick="Effect.Appear('ban{$banners[ba].f}');return false;">{gt s = 'Show Code'}</a>]</p>
+			</th>
+		</tr>
+		{sectionelse}
+		<tr class="tr01">
+			<th class="acenter">
+				---
+			</th>
+		</tr>
+		{/section}
+	</tbody>
+</table>

@@ -1,0 +1,131 @@
+{if $tour}
+<h1>{gt s = 'Book'}: <a href="{rewrite_link func=template_tour_url data=$tour lang=$lang}">{$tour.name}</a></h1>
+<p>{$tour.resume}</p>
+{if $msg}{$msg|wrap}{/if}
+<form action="{$self}" method="post" id="frmreserve" onsubmit="return v.exec()">
+<fieldset>
+	<legend>{gt s = 'Personal Information'}</legend>
+	<p>
+		<label for="rname" id="lrname">{gt s = 'Name'}:</label>
+		<input type="text" id="rname" name="rname" size="40" /> <span class="req" title="{gt s = 'Required field'}">*</span>
+	</p>
+	<p>
+		<label for="remail" id="lremail">{gt s = 'E-Mail'}:</label>
+		<input type="text" id="remail" name="remail" size="40" /> <span class="req" title="{gt s = 'Required field'}">*</span>
+	</p>
+	<p>
+		<label for="rcity">{gt s = 'City'}:</label>
+		<input type="text" id="rcity" name="rcity" />
+	</p>
+	<p>
+		<label for="rctry">{gt s = 'Country'}:</label>
+		<select name="rctry" id="rctry">
+			{html_options options=$countries selected=$default_country}
+		</select>
+	</p>
+	<p>
+		<label for="rphone">{gt s = 'Phone'}:</label>
+		<input type="text" id="rphone" name="rphone" />
+	</p>
+	<p>
+		<label for="rfax">{gt s = 'Fax'}:</label>
+		<input type="text" id="rfax" name="rfax" />
+	</p>
+</fieldset>
+<fieldset>
+	<legend>{gt s = 'Rooms Prices'}</legend>
+	<ul class="clear" style="list-style-type: none;">
+		<li><input type="radio" name="price" id="price1" checked="checked" value="price1" /> <label for="price1" class="noblock">{gt s = 'Without Hotel US$'}{$tour.price}</label></li>
+		{if $prices}
+		{if $prices.price2}<li><input type="radio" name="price" id="price2" value="price2" /> <label for="price2" class="noblock">{$prices.name2} - {$prices.city2}  US${$prices.price2} ({gt s = '2 Stars Hotel'})</li>{/if}
+		{if $prices.price3}<li><input type="radio" name="price" id="price3" value="price3" /> <label for="price3" class="noblock">{$prices.name3} - {$prices.city3}  US${$prices.price3} ({gt s = '3 Stars Hotel'})</li>{/if}
+		{if $prices.price4}<li><input type="radio" name="price" id="price4" value="price4" /> <label for="price4" class="noblock">{$prices.name4} - {$prices.city4}  US${$prices.price4} ({gt s = '4 Stars Hotel'})</li>{/if}
+		{if $prices.price5}<li><input type="radio" name="price" id="price5" value="price5" /> <label for="price5" class="noblock">{$prices.name5} - {$prices.city5}  US${$prices.price5} ({gt s = '5 Stars Hotel'})</li>{/if}
+		{/if}
+	</ul>
+</fieldset>
+<fieldset>
+	<legend>{gt s = 'Reservation Information'}</legend>
+	<p>
+		<label class="noblock">{gt s = 'Arrival Date'}:</label><br />
+		{html_select_date prefix="r_" start_year="-0" end_year="+10" field_order="DMY"}
+	</p>
+	<div id="reservedetails">
+	<p class="fleft">
+		<label class="noblock" for="radults">{gt s = 'Adults'}:</label><br />
+		<select name="radults" id="radults">
+			{html_options options=$radults}
+		</select>
+	</p>
+	<p class="fleft">
+		<label class="noblock" for="rchilds">{gt s = 'Children'}:</label><br />
+		<select name="rchilds" id="rchilds">
+			{html_options options=$rchildstudents}
+		</select>
+	</p>
+	<p class="fleft">
+		<label class="noblock" for="rstudents">{gt s = 'Students'}:</label><br />
+		<select name="rstudents" id="rstudents">
+			{html_options options=$rchildstudents}
+		</select>
+	</p>
+	<p class="clear">
+		<label for="rcomm" class="noblock">{gt s = 'Additional Requirements'}:</label><br />
+		<textarea id="rcomm" name="rcomm" cols="60" rows="7"></textarea>
+	</p>
+	<p class="button">
+		<input type="submit" name="rsub" id="rsub" value="{gt s = 'Reserve'}" />
+		<input type="reset" name="reset" id="reset" value="{gt s = 'Reset'}" />
+		<input type="hidden" name="id" id="id" value="{$tour.tourid}" />
+		<input type="hidden" name="lang" id="lang" value="{$lang}" />
+	</p>
+	</div>
+</fieldset>
+</form>
+
+<script type="text/javascript">
+	document.getElementById('rname').focus();
+	{literal}
+	var a_fields = {
+		'rname': {
+			{/literal}
+			'l': '{gt s = 'Name'}',
+			{literal}
+			'r': true,
+			't': 'lrname',
+			'mn': 4
+		},
+		'remail': {
+			{/literal}
+			'l': '{gt s = 'E-Mail'}',
+			{literal}
+			'r': true,
+			'f': 'email',
+			't': 'lremail',
+			'mn': 4
+		}
+	},
+	o_config = {
+		'to_disable' : ['rsub'],
+		'alert' : 0
+	}
+	var v = new validator('frmreserve', a_fields, o_config);
+	{/literal}
+</script>
+{else}
+<h1>{gt s = 'Tour booking'}</h1>
+
+<p>{gt s = 'We could not find the tour you have selected. If you want more information about something, please'}
+ <a href="{rewrite_link func=template_normal_url data=contact lang=$lang}">{gt s = 'contact us'}.</a>
+</p>
+
+{if $tours}
+<p>{gt s = 'This tours are related to the tour you were trying to book'}:</p>
+<ul>
+{section name=n loop=$tours}
+	<li><a href="{rewrite_link func=template_tour_url lang=$lang data=$tours[n]}">{$tours[n].name}</a></li>
+{/section}
+</ul>
+{/if}
+
+{/if}

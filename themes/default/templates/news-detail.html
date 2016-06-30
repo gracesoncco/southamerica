@@ -1,0 +1,19 @@
+<h1>{$section_title}</h1>
+<p class="tour-type">{$new.pdate|date_format:"%b %e, %Y %H:%M:%S"}</a></p>
+{if $new.pictures}
+<div id="tour-meta">
+	<div id="tour-pictures">
+	{section name=tp loop=$new.pictures}
+	<p class="thumbpicitem">
+		<a href="{$picsurl}normal_{$new.pictures[tp].picname}" title="{$new.pictures[tp].name}" rel="lightbox"><img src="{$picsurl}thumb_{$new.pictures[tp].picname}" alt="{$new.pictures[tp].name}" /></a><br />
+		{$new.pictures[tp].name}
+	</p>
+	{/section}
+	</div>
+</div>
+{/if}
+<p class="nresume">
+{$new.resume}
+</p>
+{$new.description}
+<p class="acenter"><a href="{$baseurl}news.php?lang={$lang}">&larr; {gt s = 'Show all news'}</a></p>

@@ -1,0 +1,42 @@
+			<script type="text/javascript" src="{$theme_url}scroll.js"></script>
+			<h2>{gt s = 'Search'}</h2>
+			<p id="searchbox">
+				<!-- SiteSearch Google -->
+				<form method="get" action="http://www.google.com/custom" target="_top">
+				<input type="hidden" name="domains" value="www.peruagency.com" />
+				<input type="text" name="q" size="20" maxlength="255" value="" />
+				<input type="submit" name="sa" value="Google Search" />
+				<!--<input type="radio" name="sitesearch" id="sitesearch" value="" />-->
+				<!--<label for="sitesearch" class="noblock">Web</label>-->
+				<!-- <input type="radio" name="sitesearch" value="www.peruagency.com" id="pgscript" checked="checked" /> -->
+				<input type="hidden" name="sitesearch" value="www.peruagency.com" id="pgscript" />
+				<!--<label for="pgscript" class="noblock">www.peruagency.com</label> -->
+				<input type="hidden" name="client" value="pub-8457825282640531" class="dd" />
+				<input type="hidden" name="forid" value="1" class="dd" />
+				<input type="hidden" name="channel" value="3172125826" class="dd" />
+				<input type="hidden" name="ie" value="UTF-8" class="dd" />
+				<input type="hidden" name="oe" value="UTF-8" class="dd" />
+				<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#FFFFFF;VLC:663399;AH:center;BGC:FFFFFF;LBGC:FFFFFF;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;LH:50;LW:50;L:http://www.peruagency.com/images/logo.jpg;S:http://www.peruagency.com;FORID:1;" class="dd" />
+				<input type="hidden" name="hl" value="en" class="dd" />
+				</form>
+				<!-- SiteSearch Google -->
+			</p>
+			<h2>{gt s = 'Secure Payments'}</h2>
+			<p class="banner">
+				<a href="#" onclick="javascript:window.open('https://www.paypal.com/cgi-bin/webscr?cmd=xpt/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=400, height=350');"><img  src="https://www.paypal.com/en_US/i/bnr/vertical_solution_PP.gif" alt="Solution Graphics" style="border:0" /></a><br />
+				{if !$loginuser}<a href="{$baseurl}register.php" title="{gt s = 'Afiliate to'} {$site_name}"><img src="{$theme_url}images/{$lang}-agencies.jpg" alt="{gt s = 'For Travel Agencies Only'}" /></a>{/if}
+				<a href="http://www.peruhotelsguide.com/" title="Hotel Reservations" hreflang="en" target="_blank"><img src="{$theme_url}images/phgbanner-{$lang}.jpg" alt="Peru Hotels Guide" /></a><br />
+				<a href="http://www.boliviahotelsguide.com/" title="Bolivia Hotel Reservations" hreflang="en" target="_blank"><img src="{$theme_url}images/bhgbanner.jpg" alt="Bolivia Hotels Guide" /></a><br />
+				<a href="{$baseurl}testimonials.php"><img src="{$theme_url}images/{$lang}-passengers.jpg" alt="{gt s = 'Testimonials'}" /></a><br />
+			</p>
+			{if $lnews}
+			<h2>{gt s = 'News'}</h2>
+			<div id="marqueecontainer" onmouseover="copyspeed=pausespeed" onmouseout="copyspeed=marqueespeed">
+				<div id="vmarquee">
+					{section name=lne loop=$lnews}
+						<p class="lnews">[{$lnews[lne].pdate|date_format}] <a href="{$baseurl}news-{$lnews[lne].link}.html">{$lnews[lne].name}</a></p>
+					{/section}
+				</div>
+			</div>
+			<p><a href="{$baseurl}news.php?lang={$lang}">{gt s = 'Show all news'}</a>
+			{/if}

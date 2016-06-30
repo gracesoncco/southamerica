@@ -1,0 +1,60 @@
+<form action="{$self}" method="post" name="frm" id="frm" onsubmit="return v.exec()">
+	<fieldset class="datadetail">
+		<legend>{gt s = 'Datos del Comentario'}</legend>
+		{if $msg}{$msg|wrap}{/if}
+		<p><label for="name" id="lname" class="noblock">{gt s = 'Nombre'}:</label> <br />
+		<input type="text" name="name" id="name" value="{$comment.name}" size="40" maxlength="200" /> <span class="req" title="{gt s = 'Campo requerido'}">*</span></p>
+		
+		<p><label for="email" id="lemail" class="noblock">{gt s = 'E-Mail'}:</label><br />
+		<input type="text" name="email" id="email" value="{$comment.email}" size="40" maxlength="100" /> <span class="req" title="{gt s = 'Campo requerido'}">*</span>
+		</p>
+		
+		<p><label class="noblock">{gt s = 'Tour'}:</label><br />
+		{$comment.tour_name}
+		</p>
+		
+		<p><label class="noblock">{gt s = 'Dirección IP'}:</label><br />
+		{$comment.ip}
+		</p>
+		
+		<p><label for="description" class="noblock">{gt s = 'Descripción'}:</label><br /> 
+		<textarea name="description" id="description" cols="45" rows="6">{$comment.description|escape:html}</textarea></p>
+		<p class="submit">
+			<input type="submit" name="save" id="save" value="{gt s = 'Guardar Comentario'}" class="bold" />
+			<input type="hidden" name="action" id="action" value="{$action}" />
+			<input type="submit" name="remove" id="remove" value="{gt s = 'Borrar Comentario'}" onclick="return confirm_msg()" />
+			<input type="hidden" name="id" id="id" value="{$comment.commentid}" />
+			{form_token action=comment}
+		</p>
+	</fieldset>
+</form>
+
+<script type="text/javascript">
+{if $comment}document.getElementById('name').focus();{/if}
+	{literal}
+	var a_fields = {
+		'name': {
+			{/literal}
+			'l': '{gt s = 'Name'}',  // label
+			{literal}
+			'r': true,    // required
+			't': 'lname',   // id of the element to highlight if input not validated
+			'mn': 2
+		},
+		'email': {
+			{/literal}
+			'l': '{gt s = 'E-Mail'}',  // label
+			{literal}
+			'f': 'email',
+			'r': true,    // required
+			't': 'lemail',   // id of the element to highlight if input not validated
+			'mn': 2
+		}
+	},
+	o_config = {
+		'to_disable' : ['save'],
+		'alert' : 0
+	}
+	var v = new validator('frm', a_fields, o_config);
+	{/literal}
+</script>

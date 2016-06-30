@@ -1,0 +1,44 @@
+<div class="datadetail">
+<p>Ver descripciones en: 
+{foreach from=$active_langs item=lang}
+<a href="{$self}?lang={$lang.lang_code}{if $RESULTS.current_page>1}&amp;PageIndex={$RESULTS.current_page*10-10}{/if}">{$lang.lang_name}</a> 
+{foreachelse}
+{gt s = 'Ups, debería haber algún lenguaje'}
+{/foreach}</p>
+</div>
+
+<div class="datadetail">
+<table class="datalist" summary="{gt s = 'Tours List in'} {$lang_name}" id="lista">
+	<caption>{gt s = 'Lista de Tours'}</caption>
+	<thead>
+		<tr>
+			<th>{gt s = 'Nombre'}</th>
+			<th>{gt s = 'Idiomas'}</th>
+			<th>{gt s = 'Acciones'}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{section name=n loop=$tours}
+		<tr class="{cycle values="tr01, tr02"}">
+			<td><a href="{$page_name}.php?id={$tours[n].tourid}" title="{gt s = 'Editar'} '{$tours[n].name}'">{$tours[n].name}</a></td>
+			<td>
+				{section name=nl loop=$tours[n].langs}
+					<a href="{$page_name}.php?id={$tours[n].tourid}&amp;lang={$tours[n].langs[nl].lang_code}" class="{$tours[n].langs[nl].filled}">{$tours[n].langs[nl].name}</a>,
+				{/section}
+			</td>
+			<td class="acenter"><a href="{$self}?id={$tours[n].tourid}&amp;remove&amp;{form_token action=delete-tour type=url}" class="delete" title="{gt s = 'Eliminar'} '{$tours[n].name}'" onclick="return confirm_msg()">{gt s = 'Eliminar'}</a></td>
+		</tr>		
+		{sectionelse}
+		<tr class="tr01">
+			<td colspan="3" class="acenter">{gt s = 'No hay datos que mostrar'} [<a href="{$page_name}.php">{gt s = 'Añadir uno nuevo'}</a>]</td>
+		</tr>
+		{/section}
+	</tbody>
+</table>
+{include file="adm/paginator.html"}
+</div>
+<div class="datadetail">
+<p class="updated">
+{gt s='Los enlaces de color <span class="filled">azul</span> indican que el texto existe en ese idioma, caso contrario el enlace aparecerá de color <span class="unfilled">naranja</span>.'}
+</p>
+</div>

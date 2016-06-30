@@ -1,0 +1,167 @@
+<h1>
+	{$section_title}
+</h1>
+
+<ul id="accounttabs">
+	<li><a href="{rewrite_link func=template_normal_url data=account lang=$lang}" class="current">{gt s = 'My Information'}</a></li>
+	<li><a href="{rewrite_link func=template_normal_url data=utours lang=$lang}">{gt s = 'Tours'}</a></li>
+	<li><a href="{rewrite_link func=template_normal_url data=banners lang=$lang}">{gt s = 'Banners'}</a></li>
+	<li><a href="{rewrite_link func=template_normal_url data=logout lang=$lang}">{gt s = 'Logout'}</a></li>
+</ul>
+
+{if $msg}{$msg|wrap}{/if}
+<form action="{$self}" method="post" id="frm" onsubmit="return v.exec()">
+	<fieldset>
+		<legend>{gt s = 'Personal Information'}</legend>
+		<p><label for="name" id="lname">{gt s = 'Name'}:</label> 
+		<input type="text" name="name" id="name" value="{$user.name}" size="40" maxlength="200" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+		<p><label for="email" id="lemail">{gt s = 'E-Mail'}:</label> 
+		<input type="text" value="{$user.email}" size="40" maxlength="100" disabled="disabled" name="demail" id="demail" /> <span class="req" title="{gt s = 'Required field'}">*</span>
+		<input type="hidden" name="email" id="email" value="{$user.email}" />
+		</p>
+		<p><label for="country_code">{gt s = 'Country'}:</label> 
+		<select name="country_code" id="country_code">
+			{html_options options=$countries selected=$user.country_code}
+		</select>
+		</p>
+	</fieldset>
+	<fieldset>
+		<legend>{gt s = 'System Information'}</legend>
+		<p><label for="pwd" id="lpwd">{gt s = 'Password'}:</label> 
+		<input type="password" name="pwd" id="pwd" {if $action!="update"}value="{$user.pwd}"{/if} size="20" maxlength="15" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+		<p><label for="pwd2" id="lpwd2">{gt s = 'Again'}:</label> 
+		<input type="password" name="pwd2" id="pwd2" {if $action!="update"}value="{$user.pwd}"{/if} size="20" maxlength="15" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+		<p class="tip">{gt s = 'If you don\'t change the password, don\'t write'}</p>
+	</fieldset>
+	<fieldset>
+		<legend accesskey="U">{gt s = 'Company\'s Information'}</legend>
+		<p><label for="iata">{gt s = 'IATA Number'}:</label>
+		<input type="text" name="iata" id="iata" value="{$agency.iata}" size="40" maxlength="12" /></p>
+		<p><label for="legalname">{gt s = 'Legal Name'}:</label>
+		<input type="text" name="legalname" id="legalname" value="{$agency.legalname}" size="40" maxlength="200" /></p>
+		<p><label for="dbaname">{gt s = 'DBA Name'}:</label>
+		<input type="text" name="dbaname" id="dbaname" value="{$agency.dbaname}" size="40" maxlength="200" /></p>
+		<p><label for="agencyname">{gt s = 'Company Name'}:</label>
+		<input type="text" name="agencyname" id="agencyname" value="{$agency.agencyname}" size="40" maxlength="200" /></p>
+	</fieldset>
+	
+	<fieldset>
+		<legend>{gt s = 'Primary Contact'}</legend>
+		<p><label for="primaryname">{gt s = 'Contact Name'}:</label> 
+		<input type="text" name="primaryname" id="primaryname" value="{$agency.primaryname}" size="40" maxlength="200" /> <a href="{$self}" onclick="copyfield('name','primaryname'); return false;">{gt s = 'Same'} &uarr;</a></p>
+		<p><label for="primaryemail">{gt s = 'E-Mail'}:</label> 
+		<input type="text" value="{$agency.primaryemail}" size="40" maxlength="100" name="primaryemail" id="primaryemail" /> <a href="{$self}" onclick="copyfield('email','primaryemail'); return false;">{gt s = 'Same'} &uarr;</a></p>
+		<p><label for="siteinfo">{gt s = 'Site URL'}:</label> 
+		<input type="text" name="siteinfo" id="siteinfo" value="{$agency.siteinfo}" size="40" maxlength="200" /></p>
+		<p><label for="primarycountry">{gt s = 'Country'}:</label> 
+		<select name="primarycountry" id="primarycountry">
+			{html_options options=$countries selected=$agency.primarycountry}
+		</select>
+		 <a href="{$self}" onclick="copyfield('country_code','primarycountry'); return false;">{gt s = 'Same'} &uarr;</a>
+		</p>
+		<p><label for="primarycity">{gt s = 'City'}:</label> 
+		<input type="text" value="{$agency.primarycity}" size="20" maxlength="50" name="primarycity" id="primarycity" /></p>
+		<p><label for="primarystate">{gt s = 'State/Province'}:</label> 
+		<input type="text" value="{$agency.primarystate}" size="20" maxlength="50" name="primarystate" id="primarystate" /></p>
+		<p><label for="zipcode">{gt s = 'ZIP Code'}:</label> 
+		<input type="text" value="{$agency.zipcode}" size="20" maxlength="10" name="zipcode" id="zipcode" /></p>
+		<p><label for="address">{gt s = 'Address'}:</label> 
+		<input type="text" value="{$agency.address}" size="20" maxlength="100" name="address" id="address" /></p>
+		<p><label for="primaryphone">{gt s = 'Phone'}:</label> 
+		<input type="text" value="{$agency.primaryphone}" size="20" maxlength="20" name="primaryphone" id="primaryphone" /></p>
+		<p><label for="primaryfax">{gt s = 'Fax'}:</label> 
+		<input type="text" value="{$agency.primaryfax}" size="20" maxlength="20" name="primaryfax" id="primaryfax" /></p>
+		<p class="tip">{gt s = 'Enter the contact information for the person who will receive all communications concerning the affiliate program'}</p>
+	</fieldset>
+	
+	<fieldset>
+		<legend>{gt s = 'Information for Comission Checks'}</legend>
+		<p><label for="paytoname">{gt s = 'Pay to Name'}:</label> 
+		<input type="text" name="paytoname" id="paytoname" value="{$agency.paytoname}" size="40" maxlength="200" /> <a href="{$self}" onclick="copyfield('name','paytoname'); return false;">{gt s = 'Same'} &uarr;</a></p>
+		<p><label for="paytoemail">{gt s = 'E-Mail'}:</label> 
+		<input type="text" value="{$agency.paytoemail}" size="40" maxlength="100" name="paytoemail" id="paytoemail" /> <a href="{$self}" onclick="copyfield('email','paytoemail'); return false;">{gt s = 'Same'} &uarr;</a></p>
+		<p><label for="paytocountry">{gt s = 'Country'}:</label> 
+		<select name="paytocountry" id="paytocountry">
+			{html_options options=$countries selected=$agency.paytocountry}
+		</select>
+		 <a href="{$self}" onclick="copyfield('country_code','paytocountry'); return false;">{gt s = 'Same'} &uarr;</a>
+		</p>
+		<p><label for="paytocity">{gt s = 'City'}:</label> 
+		<input type="text" value="{$agency.paytocity}" size="20" maxlength="50" name="paytocity" id="paytocity" /> <a href="{$self}" onclick="copyfield('primarycity','paytocity'); return false;">{gt s = 'Same'} &uarr;</a></p>
+		<p><label for="paytostate">{gt s = 'State/Province'}:</label> 
+		<input type="text" value="{$agency.paytostate}" size="20" maxlength="50" name="paytostate" id="paytostate" /> <a href="{$self}" onclick="copyfield('primarystate','paytostate'); return false;">{gt s = 'Same'} &uarr;</a></p>
+		<p><label for="paytozip">{gt s = 'ZIP Code'}:</label> 
+		<input type="text" value="{$agency.paytozip}" size="20" maxlength="10" name="paytozip" id="paytozip" /> <a href="{$self}" onclick="copyfield('zipcode','paytozip'); return false;">{gt s = 'Same'} &uarr;</a></p>
+		<p><label for="paytoaddress">{gt s = 'Address'}:</label> 
+		<input type="text" value="{$agency.paytoaddress}" size="20" maxlength="100" name="paytoaddress" id="paytoaddress" /> <a href="{$self}" onclick="copyfield('address','paytoaddress'); return false;">{gt s = 'Same'} &uarr;</a></p>
+	</fieldset>
+	
+	<fieldset>
+		<legend>{gt s = 'Bank Information'}</legend>
+		<p><label for="bankname" class="noblock">{gt s = 'Name of your bank'}:</label> <br />
+		<input type="text" name="bankname" id="bankname" value="{$agency.bankname}" size="40" maxlength="200" /></p>
+		<p><label for="bankaccountname" class="noblock">{gt s = 'Name of your bank account'}:</label> <br />
+		<input type="text" name="bankaccountname" id="bankaccountname" value="{$agency.bankaccountname}" size="40" maxlength="200" /></p>
+		<p><label for="routenumber" class="noblock">{gt s = 'Route number'}:</label> <br />
+		<input type="text" name="routenumber" id="routenumber" value="{$agency.routenumber}" size="40" maxlength="50" /></p>
+		<p><label for="accountnumber" class="noblock">{gt s = 'Account number'}:</label> <br />
+		<input type="text" name="accountnumber" id="accountnumber" value="{$agency.accountnumber}" size="40" maxlength="50" /></p>
+		<p><label for="statehold" class="noblock">{gt s = 'State where the account is hold'}:</label> <br />
+		<input type="text" name="statehold" id="statehold" value="{$agency.statehold}" size="40" maxlength="100" /></p>
+		
+	</fieldset>
+	<fieldset>
+		<legend>{gt s = 'Privacy and Policy'}</legend>
+		<p>
+			<textarea rows="10" cols="50" class="ohp">{$policy}</textarea>
+		</p>
+	</fieldset>
+	<p class="button">
+		<input type="submit" name="save" id="save" value="{gt s = 'I read the policies and I\'m agree'}" />
+		<input type="button" name="cancel" id="cancel" value="{gt s = 'Cancel'}" onclick="location.href = '{$baseurl}'" />
+		<input type="hidden" name="action" id="action" value="{$action}" />
+		<input type="hidden" name="id" id="id" value="{$user.userid}" />
+	</p>
+</form>
+<script type="text/javascript">
+	document.getElementById('name').focus();
+	{literal}
+	var a_fields = {
+		'name': {
+			{/literal}
+			'l': '{gt s = 'Name'}',  // label
+			{literal}
+			'r': true,
+			't': 'lname',
+			'mn': 2
+		},
+		'pwd': {
+			{/literal}
+			'l': '{gt s = 'Password'}',  // label
+			{literal}
+			'f': 'alphanum',
+			't': 'lpwd',
+			'm' : 'pwd2'
+		},
+		
+		'pwd2': {
+			{/literal}
+			'l': '{gt s = 'Password Again'}',  // label
+			{literal}
+			'f': 'alphanum',
+			't': 'lpwd2'
+		}
+		
+	},
+	o_config = {
+		'to_disable' : ['save'],
+		'alert' : 0
+	}
+	var v = new validator('frm', a_fields, o_config);
+	
+	copyfield = function(p, q) {
+		document.getElementById(q).value = document.getElementById(p).value;
+		return false;
+	}
+	{/literal}
+</script>

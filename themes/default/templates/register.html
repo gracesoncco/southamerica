@@ -1,0 +1,128 @@
+<h1>{gt s = 'Welcome'}</h1>
+{if $msg}{$msg|wrap}{/if}
+<div style="float: left; width: 50%;padding-right: 10px; ">
+<h2>{gt s = 'Login'}</h2>
+<form action="{$baseurl}login.php" method="post" name="frmlogin" id="frmlogin">
+	<fieldset>
+		<legend>{gt s = 'Login Information'}</legend>
+		<p><label for="loginemail" id="llemail" class="noblock">{gt s = 'E-Mail'}:</label> <br />
+		<input type="text" value="{$user.email}" size="30" maxlength="100" id="loginemail" name="email" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+		<p><label for="loginpwd" id="llpwd" class="noblock">{gt s = 'Password'}:</label> <br />
+		<input type="password" name="pwd" id="loginpwd" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+		<p class="button">
+			<input type="submit" name="login" id="sublogin" value="{gt s = 'Login'}" />
+			<input type="hidden" name="action" id="action" value="login" />
+			<input type="hidden" name="lang" id="lang" value="{$lang}" />
+		</p>
+	</fieldset>
+</form>
+</div>
+<div style="float: left; width: 45%; padding-left: 10px;">
+<h2>{gt s = 'New Company'}</h2>
+<form action="{$self}" method="post" name="frm" id="frm" onsubmit="return v.exec()">
+	<fieldset>
+		<legend>{gt s = 'Company\'s Information'}</legend>
+		<p><label for="name" id="lname" class="noblock">{gt s = 'Company Name'}:</label> <br />
+		<input type="text" name="name" id="name" value="{$user.name}" maxlength="200" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+		<p><label for="email" id="lemail" class="noblock">{gt s = 'E-Mail'}:</label> <br />
+		<input type="text" value="{$user.email}" maxlength="100" {if $action=="update"}disabled="disabled" name="demail" id="demail" {else} name="email" id="email" {/if} /> <span class="req" title="{gt s = 'Required field'}">*</span>
+		{if $action=="update"}
+		<input type="hidden" name="email" id="email" value="{$user.email}" />
+		{/if}</p>
+		<p><label for="country_code" class="noblock">{gt s = 'Country'}:</label> <br />
+		<select name="country_code" id="country_code">
+			{html_options options=$countries selected=$default_country}
+		</select>
+		</p>
+	</fieldset>
+	<fieldset>
+		<legend>{gt s = 'System Information'}</legend>
+		<p><label for="pwd" id="lpwd" class="noblock">{gt s = 'Password'}:</label> <br />
+		<input type="password" name="pwd" id="pwd" {if $action!="update"}value="{$user.pwd}"{/if} size="20" maxlength="15" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+		<p><label for="pwd2" id="lpwd2" class="noblock">{gt s = 'Again'}:</label> <br />
+		<input type="password" name="pwd2" id="pwd2" {if $action!="update"}value="{$user.pwd}"{/if} size="20" maxlength="15" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+		<p class="button">
+			<input type="submit" name="save" id="save" value="{gt s = 'Save'}" />
+			<input type="hidden" name="action" id="action" value="{$action}" />
+		</p>
+	</fieldset>
+</form>
+</div>
+<script type="text/javascript">
+	document.getElementById('loginemail').focus();
+	{literal}
+	var a_fields = {
+		'name': {
+			{/literal}
+			'l': '{gt s = 'Name'}',  // label
+			{literal}
+			'r': true,    // required
+			't': 'lname',   // id of the element to highlight if input not validated
+			'mn': 2
+		},
+		'email': {
+			{/literal}
+			'l': '{gt s = 'E-Mail'}',  // label
+			{literal}
+			'r': true,    // required
+			'f': 'email',  // format (see below)
+			't': 'lemail',   // id of the element to highlight if input not validated
+			'mn': 4
+		},
+		'pwd': {
+			{/literal}
+			'l': '{gt s = 'Password'}',  // label
+			{literal}
+			'r': true,    // required
+			'mn': 4,
+			'f': 'alphanum',  // format (see below)
+			't': 'lpwd',   // id of the element to highlight if input not validated
+			'm' : 'pwd2'
+		},
+		
+		'pwd2': {
+			{/literal}
+			'l': '{gt s = 'Password Again'}',  // label
+			{literal}
+			'r': true,    // required
+			'mn': 4,
+			'f': 'alphanum',  // format (see below)
+			't': 'lpwd2'   // id of the element to highlight if input not validated
+		}
+		
+	},
+	o_config = {
+		'to_disable' : ['save'],
+		'alert' : 0
+	}
+	var v = new validator('frm', a_fields, o_config);
+	/*
+	var b_fields = {
+		'loginemail': {
+			{/literal}
+			'l': '{gt s = 'E-Mail'}',  // label
+			{literal}
+			'r': true,    // required
+			'f': 'email',  // format (see below)
+			't': 'llemail',   // id of the element to highlight if input not validated
+			'mn': 4
+		},
+		'loginpwd': {
+			{/literal}
+			'l': '{gt s = 'Password'}',  // label
+			{literal}
+			'r': true,    // required
+			'mn': 4,
+			'f': 'alphanum',  // format (see below)
+			't': 'llpwd',   // id of the element to highlight if input not validated
+			'm' : 'pwd2'
+		}
+		
+	},
+	b_config = {
+		'to_disable' : ['sublogin'],
+		'alert' : 0
+	}
+	var b = new validator('frmlogin', b_fields, b_config);*/
+	{/literal}
+</script>

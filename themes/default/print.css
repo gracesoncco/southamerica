@@ -1,0 +1,250 @@
+body {
+	margin: 0;
+	padding: 0;
+	color: #525252;
+	background: #FFF;
+	font: 80%/1.5em "Tahoma", "Helvetica", "Arial", sans-serif;
+}
+
+ul li {
+	list-style-type: square;
+	line-height: 1.7em;
+}
+
+a{
+	color: #000;
+}
+
+form {
+	display: none;
+}
+
+dt {
+	font-weight: bold;
+	color: #636363;
+}
+/**
+  * Tables
+  */
+
+table {
+	width: 99%;
+	border: 1px solid #D4E0EE;
+	border-width: 1px 1px 0 0;
+	margin: .5em auto;
+}
+
+table, td, th {
+	border-collapse: collapse;
+}
+
+caption {
+	font-weight: bold;
+	padding: 3px;
+	margin: 10px auto;
+	color: #1D3652;
+}
+
+td, th {
+	padding: 3px 5px;
+	border: 1px solid #D4E0EE;
+	border-width: 0 0 1px 1px;
+}
+
+thead th {
+	background: #E6EDF5;
+	font-size: 12px;
+	color: #4F76A3;
+}
+
+table .tr01 {
+	background: #F7F9FC;
+}
+
+table .tr02 {
+	background: #FCFDFE;
+}
+
+table .tr03, table .tr04 {
+	background: #FFFFCC;
+}
+
+.delete {
+	border: 0 !important;
+	display: block;
+}
+
+.delete:hover {
+	background: #FF0000;
+	color: #FFF;
+}
+
+tbody th {
+	color: #557290;
+	text-align: left;
+}
+
+tfoot td {
+	border: 0;
+}
+
+table a:link {
+	color: #40659b;
+	text-decoration: none;
+	border-bottom: 1px solid #CCC;
+}
+
+table a:visited {
+	color: #40659b;
+	text-decoration: none;
+	border-bottom: 1px solid #CCC;
+}
+
+table a:hover {
+	color: #718d2b;
+	border-bottom: 1px solid #d39090;
+}
+
+/**
+  * Layout
+  */
+#main {
+	margin: 0;
+}
+
+#header {
+	border-bottom: 1px solid #DDD;
+}
+
+#hnav {
+	display: none;
+}
+
+#nav {
+	display: none
+}
+
+#ads {
+	display: none;
+}
+
+#content {
+	margin: 0 3em;
+}
+
+#content h1 {
+	font-weight: normal;
+	font: 160%/1em Arial, Verdana, Helvetica, sans-serif;
+	color: #343434;
+}
+
+#content h2 {
+	color: #636363;
+	font: 140%/1em Arial, Verdana, Helvetica, sans-serif;
+	margin-bottom: 5px;
+	padding-bottom: 0px;
+}
+
+#content p {
+	padding-top: 2px;
+	padding-bottom: 2px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+#footer {
+	clear: both;
+	text-align: center;
+	padding: 10px;
+	border-top: 1px solid #DDD;
+	margin-top: 20px;
+	font-size: 90%;
+	color: #333;
+}
+
+#fnav {display: none;}
+
+.aright { text-align: right; }
+.acenter { text-align: center !important; }
+.fright { float: right; }
+.fleft { float: left;}
+.clear { clear: both; }
+.hidden { display: none;}
+.upper { text-transform: uppercase; }
+.ohp { width: 95%;}
+
+.paginator  {
+	display: none;
+}
+
+.big {
+	display: none;
+}
+
+/* Tours */
+.tour-dest, .tour-type {
+	color: #222;
+	font: 90% "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	margin: 2px auto;
+}
+
+.tour-dest {
+	margin-bottom: 10px !important;
+	padding-bottom: 5px !important;
+	border-bottom: 1px solid #DDD;
+}
+
+#tour-info p {
+	text-align: justify;
+}
+
+#tour-info h2 {
+	font-size: 100%;
+	font-weight: bold;
+}
+
+#tour-meta {
+	float: right;
+	font: 90%/1.9em "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	margin: 0 10px;
+	padding: 0 20px 10px;
+	width: 200px;
+	text-align: center;
+}
+
+#booknow {
+	display: none;
+}
+
+.thumbpicitem {
+	width: 200px;
+	height: 150px;
+	margin: 5px;
+	text-align: center;
+}
+
+.thumbpicitem a {
+	border: 0 !important;
+}
+
+
+.thumbpicitem img {
+	padding: 4px;
+	border: 1px solid #dedede;
+	background: #f9f9f9;
+}
+
+.thumbpicitem .nb {
+	border: 1px solid #FFF;
+	padding: 0;
+	background: none;
+}
+
+.top {
+	display: none;
+}
+
+#tour-nav {display: none;}
+#skipnav {display: none;}
+#switchhomelang {display: none;}
+#tofc {display: none;}

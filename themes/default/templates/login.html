@@ -1,0 +1,55 @@
+<h1>
+	{$section_title}
+</h1>
+<form action="{$self}" method="post" name="frm" id="frm" onsubmit="return v.exec()">
+	<fieldset>
+		<legend>{gt s = 'Login Information'}</legend>
+		{if $msg}{$msg|wrap}{/if}
+		<p><label for="email" id="lemail">{gt s = 'E-Mail'}:</label> 
+		<input type="text" value="{$user.email}" size="40" maxlength="100" id="email" name="email" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+		<p><label for="pwd" id="lpwd">{gt s = 'Password'}:</label> 
+		<input type="password" name="pwd" id="pwd" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+		<p class="button">
+			<input type="submit" name="login" id="login" value="{gt s = 'Login'}" />
+			<input type="hidden" name="r" id="r" value="{$r}" />
+			<input type="hidden" name="action" id="action" value="login" />
+			<input type="hidden" name="lang" id="lang" value="{$lang}" />
+		</p>
+	</fieldset>
+</form>
+<p class="acenter">
+{gt s = 'If you don\'t have an account'}, <a href="{$baseurl}register.php?lang={$lang}">{gt s = 'Register'}</a> {gt s = 'i\'ts free'}.
+</p>
+<p class="acenter">
+	<a href="{$self}?action=lostpassword&lang={$lang}">{gt s = 'Forgot your password?'}</a>
+</p>
+<script type="text/javascript">
+	document.getElementById('email').focus();
+	{literal}
+	var a_fields = {
+		'email': {
+			{/literal}
+			'l': '{gt s = 'E-Mail'}',
+			{literal}
+			'r': true,
+			'f': 'email',
+			't': 'lemail',
+			'mn': 4
+		},
+		'pwd': {
+			{/literal}
+			'l': '{gt s = 'Password'}',
+			{literal}
+			'r': true,
+			'mn': 4,
+			'f': 'alphanum',
+			't': 'lpwd'
+		}		
+	},
+	o_config = {
+		'to_disable' : ['login'],
+		'alert' : 0
+	}
+	var v = new validator('frm', a_fields, o_config);
+	{/literal}
+</script>

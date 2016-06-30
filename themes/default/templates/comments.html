@@ -1,0 +1,50 @@
+<h2 id="comments">{gt s = 'Comments'} (<a href="#commentsform">{gt s = 'Post a comment'}</a>)</h2>
+
+{if $comments}
+	<ol id="comment-list">
+	{section name=cm loop=$comments}
+	<li class="comment-box" id="comment-{$comments[cm].commentid}">
+		<div class="comment">
+			<p class="comment_meta" id="{$comments[cm].commentid}"><em>{$comments[cm].name|escape:"htmlall"}</em> {$comments[cm].pdate}</p>
+			<p>{$comments[cm].description|nl2br}</p>
+		</div>
+	</li>
+	{/section}
+	</ol>
+{else}
+	<p>{gt s = 'There are no comments'}</p>
+{/if}
+<p class="acenter"><a href="#content" class="top">{gt s = 'Top'} &uarr;</a></p>
+
+<h2 id="commentsform">{gt s = 'Post a comment'}</h2>
+
+{if $moderation}
+<p class="warning">{gt s = "Thanks for sharing your feedback! If your feedback does not appear right away, please be patient, it may take some time to publish because the site's administrator is moderating comments."}.</p>
+{/if}
+
+<form action="{$baseurl}comment.php" method="post" id="frmcomments">
+	<fieldset>
+		<legend>{gt s = 'Comment Data'}</legend>
+		<p><label for="name" class="noblock">{gt s = 'Name'}:</label> <br />
+		<input type="text" name="name" id="name" size="40" maxlength="200" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+		<p><label for="email" class="noblock">{gt s = 'E-Mail'}:</label><br />
+		<input type="text" name="email" id="email" size="40" maxlength="100" /> <span class="req" title="{gt s = 'Required field'}">*</span>
+		</p>
+		
+		<p><label for="description" class="noblock">{gt s = 'Consults, comments or suggestions'}:</label><br /> 
+		<textarea name="description" id="description" cols="45" rows="6"></textarea></p>
+		
+		<p>
+		{html_spam}
+		</p>
+		
+		<p id="msg" {if $msg}class="msg"{/if}>{$msg}</p>
+		
+		<p class="button">
+			<input type="submit" name="save" id="save" value="{gt s = 'Send'}" onclick="" />
+			<input type="hidden" name="id" id="id" value="{$tour.tourid}" />
+			<input type="hidden" name="lang" id="lang" value="{$lang}" />
+			{form_token}
+		</p>
+	</fieldset>
+</form>

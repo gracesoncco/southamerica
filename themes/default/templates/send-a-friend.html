@@ -1,0 +1,33 @@
+<h1>{gt s='Recommend'}: <a href="{rewrite_link func=template_tour_url data=$tour lang=$lang}">{$tour.name}</a></h1>
+
+<form action="{$self}" method="post" id="frm">
+<fieldset>
+	{$msg}
+	<p>
+		<label for="fname" class="noblock">{gt s = 'Your name'}:</label><br />
+		<input type="text" id="fname" name="fname" size="40" /> <span class="req" title="{gt s = 'Required field'}">*</span>
+	</p>
+	<p>
+		<label for="fmail" class="noblock">{gt s = 'Your e-Mail'}:</label><br />
+		<input type="text" id="fmail" name="fmail" size="40" /> <span class="req" title="{gt s = 'Required field'}">*</span>
+	</p>
+	<p>
+		<label for="dname" class="noblock">{gt s = 'Your friend name'}:</label><br />
+		<input type="text" id="dname" name="dname" size="40" /> <span class="req" title="{gt s = 'Required field'}">*</span>
+	</p>
+	<p>
+		<label for="demail" class="noblock">{gt s = 'Your friend e-Mail'}:</label><br />
+		<input type="text" id="demail" name="dmail" size="40" /> <span class="req" title="{gt s = 'Required field'}">*</span>
+	</p>
+	<p>
+		<label for="personal" class="noblock">{gt s = 'Put a personal message'}:</label><br />
+		<textarea id="personal" name="personal" cols="60" rows="7">{gt s='Hi!, see this amazing tour.'}</textarea>
+	</p>
+	<p class="button">
+		<input type="submit" name="rsub" id="rsub" value="{gt s = 'Send'}" />
+		<input type="reset" name="reset" id="reset" value="{gt s = 'Reset'}" />
+		<input type="hidden" name="id" id="id" value="{$tour.tourid}" />
+		<input type="hidden" name="lang" id="lang" value="{$lang}" />
+	</p>
+</fieldset>
+</form>

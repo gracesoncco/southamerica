@@ -1,0 +1,12 @@
+<p>Estimado <strong>{$name}</strong>, gracias por tu reserva</p>
+<h1>Descripción</h1>
+<p>Acabas de reservar el Tour <strong><a href="{rewrite_link func=template_tour_url data=$tour lang=$tour.lang_code}">{$tour.name}</a> ({$lodge_details.lname})</strong></p>
+<p>Precio Total: <strong>US$ {$lodge_details.lprice}</strong></p>
+<p>Para reconfirmar su reserva y pagar en linea siga esta direccion:<br />
+<a href="{$baseurl}payment.php?r={$presell.reservecod}&amp;lang={$tour.lang_code}">{$baseurl}payment.php?lang={$tour.lang_code}&amp;r={$presell.reservecod}</a></p>
+<p>Si el enlace no funcionara, su codigo de reserva es <strong>{$presell.reservecod}</strong> copie su codigo e ingrese a <br />
+<a href="{$baseurl}payment.php">{$baseurl}payment.php</a></p>
+<p>Si los enlaces no funcionan, copie la direccion y peguela en el navegador.</p>
+<p>Saludos</p>
+<p>{$signature}</p>
+<p><small>Los acentos y caracteres especiales han sido quitados para evitar problemas de compatibilidad con clientes de correo electrónico.</small><p>

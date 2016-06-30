@@ -1,0 +1,61 @@
+<h1>{if $tour}{gt s = 'Ask for more information about'} <a href="{rewrite_link func=template_tour_url data=$tour lang=$lang}">{$tour.name}</a>{else}{gt s = 'Contact Us'}{/if}</h1>
+
+<form action="{$self}" method="post" 	id="frm" onsubmit="return v.exec()">
+<fieldset>
+	<legend>{gt s = 'Personal Information'}</legend>
+	<p>
+		<label for="rname" id="lrname" class="noblock">{gt s = 'Name'}:</label><br />
+		<input type="text" id="rname" name="rname" size="40" /> <span class="req" title="{gt s = 'Required field'}">*</span>
+	</p>
+	<p>
+		<label for="remail" id="lremail" class="noblock">{gt s = 'e-Mail'}:</label><br />
+		<input type="text" id="remail" name="remail" size="40" /> <span class="req" title="{gt s = 'Required field'}">*</span>
+	</p>
+	<p>
+		<label for="rctry" class="noblock">{gt s = 'Country'}:</label><br />
+		<select name="rctry" id="rctry">
+			{html_options options=$countries selected=$default_country}
+		</select>
+	</p>
+	<p>
+		<label for="rcomm" class="noblock">{gt s = 'Consults, comments or suggestions'}:</label><br />
+		<textarea id="rcomm" name="rcomm" cols="60" rows="7"></textarea>
+	</p>
+	<p class="button">
+		<input type="submit" name="rsub" id="rsub" value="{gt s = 'Send'}" />
+		<input type="reset" name="reset" id="reset" value="{gt s = 'Reset'}" />
+		<input type="hidden" name="id" id="id" value="{$tour.tourid}" />
+		<input type="hidden" name="lang" id="lang" value="{$lang}" />
+	</p>
+</fieldset>
+</form>
+
+<script type="text/javascript">
+	document.getElementById('rname').focus();
+	{literal}
+	var a_fields = {
+		'rname': {
+			{/literal}
+			'l': '{gt s = 'Name'}',
+			{literal}
+			'r': true,
+			't': 'lrname',
+			'mn': 4
+		},
+		'remail': {
+			{/literal}
+			'l': '{gt s = 'E-Mail'}',
+			{literal}
+			'r': true,
+			'f': 'email',
+			't': 'lremail',
+			'mn': 4
+		}
+	},
+	o_config = {
+		'to_disable' : ['rsub'],
+		'alert' : 0
+	}
+	var v = new validator('frm', a_fields, o_config);
+	{/literal}
+</script>

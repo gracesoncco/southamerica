@@ -1,0 +1,69 @@
+<h3>{gt s = 'Escoge una opción para empezar'}</h3>
+<table class="datalist" summary="Últimas reservas">
+	<caption>{gt s = 'Últimas reservas'}</caption>
+	<thead>
+		<tr>
+			<th>{gt s = 'Nombre'}</th>
+			<th>{gt s = 'País'}</th>
+			<th>{gt s = 'Tour'}</th>
+			<th>{gt s = 'Fecha'}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{section name=n loop=$reserves}
+		<tr class="{cycle values="tr01, tr02"}">
+			<td><a href="{$admurl}reserve.php?id={$reserves[n].reserveid}" title="{gt s = 'Ver reserva'} '{$reserves[n].name}'">{$reserves[n].name}</a></td>
+			<td>{$reserves[n].country}</td>
+			<td>{$reserves[n].tourname}</td>
+			<td>{$reserves[n].freserve|date_format:"%d %B %Y %H:%m"}</td>
+		</tr>
+		{sectionelse}
+		<tr class="tr01">
+			<td colspan="4" class="acenter">{gt s = 'No hay reservas'}</td>
+		</tr>
+		{/section}
+		<tr>
+			<td colspan="4"><a href="{$admurl}reserve.php#lista">{gt s = 'Ver todas las reservas'} &raquo;</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="datalist">
+	<caption>Destinos</caption>
+	<thead>
+		<tr>
+			<th>{gt s = 'Opción'}</th>
+			<th>{gt s = 'Descripción'}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="tr01">
+			<td><a href="{$admurl}destination.php">{gt s = 'Destinos'}</a></td>
+			<td>{gt s = 'Añadir, editar, eliminar nuevos Destinos'}</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="datalist">
+	<caption>{gt s = 'Paquetes'}</caption>
+	<thead>
+		<tr>
+			<th>{gt s = 'Opción'}</th>
+			<th>{gt s = 'Descripción'}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="tr01">
+			<td><a href="{$admurl}tourtype.php">{gt s = 'Tipos de Tour'}</a></td>
+			<td>{gt s = 'Añadir, editar, eliminar nuevos Tipos de Tour'}</td>
+		</tr>
+		<tr class="tr02">
+			<td><a href="{$admurl}picture.php">{gt s = 'Imágenes'}</a></td>
+			<td>{gt s = 'Añadir, editar, eliminar nuevas imágenes'}</td>
+		</tr>
+		<tr class="tr01">
+			<td><a href="{$admurl}tour.php">{gt s = 'Paquetes'}</a></td>
+			<td>{gt s = 'Añadir, editar, eliminar nuevos Paquetes'}</td>
+		</tr>
+	</tbody>
+</table>

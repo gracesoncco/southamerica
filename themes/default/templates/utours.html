@@ -1,0 +1,47 @@
+<h1>
+	{$section_title}
+</h1>
+
+<ul id="accounttabs">
+	<li><a href="{rewrite_link func=template_normal_url data=account lang=$lang}">{gt s = 'My Information'}</a></li>
+	<li><a href="{rewrite_link func=template_normal_url data=utours lang=$lang}" class="current">{gt s = 'Tours'}</a></li>
+	<li><a href="{rewrite_link func=template_normal_url data=banners lang=$lang}">{gt s = 'Banners'}</a></li>
+	<li><a href="{rewrite_link func=template_normal_url data=logout lang=$lang}">{gt s = 'Logout'}</a></li>
+</ul>
+{if $msg}{$msg|wrap}{/if}
+{if $tours}
+<table class="tabla">
+	<thead>
+		<tr>
+			<th>{gt s= 'Tour Packages'}</th>
+			<th>PDF</th>
+			<th>{gt s = 'Reserve'}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{section name=ut loop=$tours}
+			<tr class="{cycle values="tr01, tr02"}">
+				<td>
+					<a href="{rewrite_link func=template_tour_url data=$tours[ut] lang=$lang}">{$tours[ut].name}</a> <strong>(US$ {$tours[ut].price})</strong> <br />
+					{gt s = 'Include'}: {section name=utd loop=$tours[ut].destinations}<a href="{rewrite_link func=template_destination_url data=$tours[ut].destinations[utd] lang=$lang}">{$tours[ut].destinations[utd].name}</a>, {/section}
+				</td>
+				<td>
+					{section name=pd loop=$tours[ut].pdfs}
+						<p>
+							<a href="{rewrite_link func=template_pdf_url data=$tours[ut] lang=$lang}" class="pdf" target="_blank">{gt s = 'Download'}</a>
+						</p>
+					{sectionelse}
+						<p>
+							<span class="nopdf">{gt s = 'Download'}</span>
+						</p>
+					{/section}
+				</td>
+				<td><a href="{rewrite_link func=template_book_url data=$tours[ut] lang=$lang}" class="ureserve">{gt s = 'Reserve'}</a></td>
+			</tr>
+		{/section}
+	</tbody>
+</table>
+{include file="adm/paginator.html"}
+{else}
+<p>{gt s = 'There are no tours'}</p>
+{/if}

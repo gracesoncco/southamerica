@@ -1,0 +1,103 @@
+<h1>{$tour.name} {if $tour.price>0}<acronym title="United States Dollar" lang="en">US$</acronym> {$tour.price}{/if}</h1>
+{if $msg}{$msg|wrap}{/if}
+<div id="tour-meta">
+	<h3>{gt s = 'Booking &amp; Contact'}</h3>
+	<ul>
+		<li><a href="{rewrite_link func=template_book_url data=$tour}" title="{gt s = 'Book now'} '{$tour.name}'">{gt s = 'Book now'}</a></li>		
+		<li><a href="{rewrite_link func=template_contact_url data=$tour lang=$lang}" class="lbOn" title="{gt s = 'I want more information about'} '{$tour.name}'">{gt s = 'I want more information'}</a></li>
+		<li><a href="{rewrite_link func=template_recommend_url data=$tour lang=$lang}">{gt s = 'Recommend this tour'}</a></li>
+{if $tour.pictures}
+		<li><a href="{rewrite_link func=template_gallery_url data=$tour lang=$lang}">{gt s = 'Photo Gallery'}</li>
+		{/if}
+	</ul>	
+
+	{if $tour.pictures}
+	<div id="tour-pictures">
+	{section name=tp loop=$tour.pictures}
+	{if $tour.pictures[tp].pfor != 'm'}
+	<p class="thumbpicitem">
+		<a href="{$picsurl}normal_{$tour.pictures[tp].picname}" title="{$tour.pictures[tp].name}" rel="lightbox1" class="effectable"><img src="{$picsurl}thumb_{$tour.pictures[tp].picname}" alt="{$tour.pictures[tp].name}" /></a><br />
+		{$tour.pictures[tp].name}
+	</p>
+	{/if}
+	{/section}
+	</div>
+	{/if}
+</div>
+<!--
+<a href="{rewrite_link func=template_book_url data=$tour}" title="{gt s = 'Book now'} '{$tour.name}'">{gt s = 'Book now'}</a><br />
+<a href="#comments" title="Post your comments about this tour">{gt s = 'Comments'}</a><br />
+<a href="{rewrite_link func=template_contact_url data=$tour lang=$lang}" class="lbOn" title="{gt s = 'I want more information about'} '{$tour.name}'">{gt s = 'I want more information'}</a><br />
+{if $tour.pictures[0].pfor == 'm'}
+<a href="{$picsurl}normal_{$tour.pictures[tp].picname}" title="{$tour.pictures[tp].name}" onclick="map('{$tour.pictures[tp].picname}'); return false;">{gt s = 'View Map'}</a><br />
+{/if}
+-->
+
+<dl id="data">
+<a href="{rewrite_link func=template_tourtype_url data=$tour.tourtype}">{$tour.tourtype.name}</a>
+	
+<dt>{gt s = 'Visited Destinations'}:</dt>
+	<dd>
+		{section name=otd loop=$tour.destinations}
+			<a href="{rewrite_link func=template_destination_url data=$tour.destinations[otd]}">{$tour.destinations[otd].name}</a> 
+		{/section}
+	</dd>
+</dl>
+
+{if $tour.resume}
+<h2 id="resume">{gt s = 'Resume'}</h2>
+<p>
+{$tour.resume}
+</p>
+<p class="acenter"><a href="#content" class="top">{gt s = 'Top'} &uarr;</a></p>
+{/if}
+
+{if $tour.itinerary}
+<h2 id="itinerary">{gt s = 'Itinerary'}</h2>
+{$tour.itinerary}
+<p class="acenter"><a href="#content" class="top">{gt s = 'Top'} &uarr;</a></p>
+{/if}
+
+{if $tour.include}
+<h2 id="include">{gt s = 'Include'}</h2>
+{$tour.include}
+<p class="acenter"><a href="#content" class="top">{gt s = 'Top'} &uarr;</a></p>
+{/if}
+
+{if $tour.notinclude}
+<h2 id="notinclude">{gt s = 'Not Include'}</h2>
+{$tour.notinclude}
+<p class="acenter"><a href="#content" class="top">{gt s = 'Top'} &uarr;</a></p>
+{/if}
+
+{if $tour.notes}
+<h2 id="notes">{gt s = 'Notes'}</h2>
+<p>
+{$tour.notes}
+</p>
+<p class="acenter"><a href="#content" class="top">{gt s = 'Top'} &uarr;</a></p>
+
+{/if}
+{if $prices}
+<h2 id="hotels">{gt s = 'Hotels'}</h2>
+<table class="tabla" summary="{gt s = 'Rooms Prices'}" style="width: auto !important; margin: 5px !important;">
+<thead>
+	<tr>
+		<th>{gt s = 'Hotels'} ({$prices.cities})</th>
+		<th>{gt s = 'Price US$'}</th>
+	</tr>
+</thead>
+<tbody>
+	<tr class="tr01"><th>{gt s = 'Without Hotel US$'}</th><td class="aright">{$tour.price}</td></tr>
+	{if $prices.price2}<tr class="tr01"><th>{$prices.name2}</th><td class="aright">{$prices.price2}</td></tr>{/if}
+	{if $prices.price3}<tr class="tr02"><th>{$prices.name3}</th><td class="aright">{$prices.price3}</td></tr>{/if}
+	{if $prices.price4}<tr class="tr01"><th>{$prices.name4}</th><td class="aright">{$prices.price4}</td></tr>{/if}
+	{if $prices.price5}<tr class="tr02"><th>{$prices.name5}</th><td class="aright">{$prices.price5}</td></tr>{/if}
+</tbody>
+</table>
+{/if}
+
+<p class="acenter big">
+<a href="{rewrite_link func=template_book_url data=$tour}"><strong>{gt s = 'Book now'} '{$tour.name}'</strong></a>
+</p>
+

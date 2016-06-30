@@ -1,0 +1,68 @@
+<form action="{$self}" method="post" name="frm" id="frm" onsubmit="return v.exec()" enctype="multipart/form-data">
+	<fieldset class="datadetail">
+		{if $msg}{$msg|wrap}{/if}		
+		<p>
+			<label for="t2">{gt s = 'Tipo'}:</label><br />
+			<select name="t2" id="t2" onchange="document.getElementById('t').value = this.value">
+				{html_options options = $tpic selected = $picture.pfor}
+			</select>
+		</p>
+
+		<p><label for="name" id="lname">{gt s = 'Nombre'}:</label> <br />
+		<input type="text" name="name" id="name" value="{$picture.name}" size="40" maxlength="100" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+
+		<p><label for="pic" id="lpic">{gt s = 'Imagen'}:</label> <br />
+		<input type="file" name="pic" id="pic" size="45" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+
+		<p class="submit">
+			<input type="submit" name="save" id="save" class="bold" value="{gt s = 'Guardar Imagen'}" />
+			{if $picture}
+			<input type="submit" name="remove" id="remove" value="{gt s = 'Eliminar Imagen'}" onclick="return confirm_msg();" />
+			{/if}
+			<input type="hidden" name="id" id="id" value="{$picture.picid}" />
+			<input type="hidden" name="t" id="t" value="{$t}" />
+		</p>		
+		{if $picture}
+			<p>
+			<a href="{$picsurl}normal_{$picture.picname}" title="{$picture.name}'" rel="lightbox"><img src="{$picsurl}thumb_{$picture.picname}" alt="{$picture.picname}" /></a><br />
+			</p>
+		{/if}
+	</fieldset>
+</form>
+
+{if $picture}
+<div class="datadetail">
+<p class="updated">
+	{gt s = 'Haz click en la imágen para agrandar el tamaño.'}
+</p>
+</div>
+{/if}
+
+<script type="text/javascript">
+	document.getElementById('name').focus();
+	{literal}
+	var a_fields = {
+		'name': {
+			{/literal}
+			'l': '{gt s = 'Name'}',  // label
+			{literal}
+			'r': true,    // required
+			't': 'lname',   // id of the element to highlight if input not validated
+			'mn': 2
+		}{/literal}{if !$picture}{literal},
+		'pic': {
+			{/literal}
+			'l': '{gt s = 'Picture'}',  // label
+			{literal}
+			'r': true,    // required
+			't': 'lpic'
+		}{/literal}{/if}{literal}
+		
+	},
+	o_config = {
+		'to_disable' : ['save'],
+		'alert' : 0
+	}
+	var v = new validator('frm', a_fields, o_config);
+	{/literal}
+</script>

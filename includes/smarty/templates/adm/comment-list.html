@@ -1,0 +1,44 @@
+<div class="datadetail">
+<p>{gt s='Ver los comentarios hechos en'}: 
+{foreach from=$active_langs item=lang}
+<a href="{$self}?lang={$lang.lang_code}">{$lang.lang_name}</a>
+{foreachelse}
+{gt s = 'Ops!, debería haber algún lenguaje'}
+{/foreach}</p>
+{if $comment_count && ($spam_filter.method == 'akismet' || $spam_filter.method == 'moderate')}
+<p><a href="moderation.php">{gt s = 'Moderar comentarios'} ({$comment_count|default:0})</a></p>
+{/if}
+</div>
+<div class="datadetail">
+{if $msg}{$msg|wrap}{/if}
+<table class="datalist" summary="{gt s = 'Comments List'}" id="lista">
+	<caption>{gt s = 'Lista de comentarios'}</caption>
+	<thead>
+		<tr>
+			<th>{gt s = 'Nombre'}</th>
+			<th>{gt s = 'E-Mail'}</th>
+			<th>{gt	s = 'Tour'}</th>
+			<th>{gt s = 'Fecha'}</th>
+			<th>{gt s = 'Acciones'}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{section name=n loop=$comments}
+		<tr class="{cycle values="tr01, tr02"}">
+			<td><a href="{$page_name}.php?id={$comments[n].commentid}" title="{gt s = 'Editar'} '{$comments[n].name}'">{$comments[n].name}</a></td>
+			<td>{$comments[n].email}</td>
+			<td>{$comments[n].tour_name}</td>
+			<td>{$comments[n].pdate|date_format:"%b %d, %Y %T"}</td>
+			<td class="acenter">
+				<a href="{$self}?id={$comments[n].commentid}&amp;remove&amp;{form_token action=remove-comment type=url}" class="delete" title="{gt s = 'Borrar'} '{$comments[n].name}'" onclick="return confirm_msg()">{gt s = 'Borrar'}</a>
+			</td>
+		</tr>		
+		{sectionelse}
+		<tr class="tr01">
+			<td colspan="5" class="acenter">{gt s = 'No hay comentarios'}</td>
+		</tr>
+		{/section}
+	</tbody>
+</table>
+{include file="adm/paginator.html"}
+</div>

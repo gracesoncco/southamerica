@@ -1,0 +1,23 @@
+<h1 id="infode">{$destination.name}</h1>
+<ul id="tofc">
+	<li><a href="#infode">{$destination.name}</a></li>
+	<li><a href="#tours-in">{gt s = 'Tours in'} {$destination.name}</a></li>
+</ul>
+{$destination.description}
+<p class="acenter"><a href="#content">{gt s = 'Top'} &uarr;</a></p>
+<h1 id="tours-in">{gt s = 'Tours in'} {$destination.name}</h1>
+{if $tours}
+<ul id="utours">
+{section name=ut loop=$tours}
+	<li class="{cycle values="l01, l02"}">
+		<div class="fright"><a href="{rewrite_link func=template_book_url data=$tours[ut] lang=$lang}" class="ureserve">{gt s = 'Book now!'}</a></div>
+		<a href="{rewrite_link func=template_tour_url data=$tours[ut] lang=$lang}">{$tours[ut].name}</a> <strong>(US$ {$tours[ut].price})</strong> <br />
+		{gt s = 'Include'}: {section name=utd loop=$tours[ut].destinations}<a href="{rewrite_link func=template_destination_url data=$tours[ut].destinations[utd] lang=$lang}">{$tours[ut].destinations[utd].name}</a>, {/section}
+	</li>
+{/section}
+</ul>
+{else}
+<p>{gt s = 'There are no tours in this destination'}</p>
+{/if}
+<p class="acenter"><a href="#content">{gt s = 'Top'} &uarr;</a></p>
+{include file="adm/paginator.html"}

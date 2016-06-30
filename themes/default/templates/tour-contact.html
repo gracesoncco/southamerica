@@ -1,0 +1,61 @@
+<h3>{$section_title}</h3>
+<p class="msg" id="msgbox" style="display: none"></p>
+<form action="{$self}" method="post" name="frmcontact" id="frmcontact" onsubmit="return tourContact();">
+<fieldset>
+	<legend>{gt s = 'Personal Information'}</legend>
+	<p>
+		<label for="cname" id="lcname" class="noblock">{gt s = 'Name'}:</label><br />
+		<input type="text" id="cname" name="cname" size="60" /> <span class="req" title="{gt s = 'Required field'}">*</span>
+	</p>
+	<p>
+		<label for="cemail" id="lcemail" class="noblock">{gt s = 'E-Mail'}:</label><br />
+		<input type="text" id="cemail" name="cemail" size="60" /> <span class="req" title="{gt s = 'Required field'}">*</span>
+	</p>
+	<p>
+		<label for="cctry" class="noblock">{gt s = 'Country'}:</label><br />
+		<select name="cctry" id="cctry">
+			{html_options options=$countries}
+		</select>
+	</p>
+	<p>
+		<label for="rcomm" class="noblock">{gt s = 'Consults, comments or suggestions'}:</label><br />
+		<textarea id="rcomm" name="rcomm" cols="60" rows="7">{gt s = 'I want more information about '}{$tour.name}</textarea>
+	</p>
+	<p class="button">
+		<input type="submit" name="rsub" id="rsub" value="{gt s = 'Send'}" />
+		<a href="#" class="lbAction" rel="deactivate"><input type="button" name="cancel" id="cancel" value="{gt s = 'Cancel'}" /></a>
+		<input type="hidden" name="id" id="id" value="{$tour.tourid}" />
+		<input type="hidden" name="lang" id="lang" value="{$lang}" />
+	</p>
+	</div>
+</fieldset>
+</form>
+
+<script type="text/javascript">
+	{literal}
+	var a_fields = {
+		'cname': {
+			{/literal}
+			'l': '{gt s = 'Name'}',
+			{literal}
+			'r': true,
+			't': 'lcname',
+			'mn': 4
+		},
+		'cemail': {
+			{/literal}
+			'l': '{gt s = 'E-Mail'}',
+			{literal}
+			'r': true,
+			'f': 'email',
+			't': 'lcemail',
+			'mn': 4
+		}
+	},
+	o_config = {
+		'to_disable' : ['rsub'],
+		'alert' : 0
+	}
+	var v = new validator('frmcontact', a_fields, o_config);
+	{/literal}
+</script>

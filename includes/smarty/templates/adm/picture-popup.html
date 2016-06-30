@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{$media_url}admin/style.css" />
+	
+	<script type="text/javascript" src="{$media_url}js/generic.js"></script>
+	<script type="text/javascript" src="{$media_url}js/validator.js"></script>
+	<script type="text/javascript">
+		/*
+			Este es un script totálmente improvisado, cualquier queja a su mamá :)
+		*/
+		{literal}
+		c = function (tag) {
+		   return window.opener.document.createElement(tag);
+		}
+		
+		d = function (id) {
+			return window.opener.document.getElementById(id);
+		}
+		
+		addpictotour = function (picid, picname, name) {
+			if ( window.opener == null ) {
+				{/literal}
+				alert('{gt s = 'Impossible to add picture.'}');
+				{literal}
+				self.close();
+				return false;
+			} else {
+				if (d('ipic_' + picid)) {
+					{/literal}
+					alert('This picture already exists.')
+					{literal}
+					return false;
+				} else {
+					var whatever = d('whatever');
+					npm = d('nopicturesmsg')
+					if(npm != null) npm.parentNode.removeChild(npm);
+					p = c('P');
+					p.className = 'thumbpicitem';
+					p.id = 'thumbpiccont' + picid;
+					
+					img = c('IMG');
+					img.id = 'pic_' + picid;
+					{/literal}
+					img.src = '{$picsurl}' + picname;
+					{literal}
+					img.alt = name;
+					
+					a = c('A');
+					a.href = '#whatever';
+					{/literal}
+					a.innerHTML = '[{gt s = 'Remove'}]';
+					{literal}
+					a.onclick = window.opener.removetourpicture
+					a.name = p.id; 
+					
+					span = c('SPAN');
+					span.innerHTML = '<br />' +  name + ' ';
+					span.appendChild(a);
+					
+					input = c('INPUT');
+					input.type = 'hidden';
+					input.name = 'ipictures[]';
+					input.id = 'ipic_' + picid;
+					input.value = picid;
+					
+					p.appendChild(img);
+					p.appendChild(span);
+					p.appendChild(input);
+					
+					whatever.appendChild(p);
+				}
+			}
+		}	
+		var a_fields = {
+			'name': {
+				{/literal}'l': '{gt s = 'Name'}',  // label{literal}
+				'r': true,    // required
+				't': 'lname',   // id of the element to highlight if input not validated
+				'mn': 2
+			},
+			'pic': {
+				{/literal}'l': '{gt s = 'Picture'}',  // label{literal}
+				'r': true,    // required
+				't': 'lpic'
+			}
+			
+		},
+		o_config = {
+			'to_disable' : ['save'],
+			'alert' : 0
+		}
+		var v = new validator('frm', a_fields, o_config);
+		var cookie = 'pics-popup';
+		{/literal}
+	
+	</script>
+	<script type="text/javascript" src="{$media_url}js/moo.js"></script>
+	<script type="text/javascript" src="{$media_url}js/fat.js"></script>
+	<script type="text/javascript" src="{$media_url}js/dbx.js"></script>
+	<script type="text/javascript" src="{$media_url}js/dbx-key.js"></script>
+	<title>{$section_title}</title>
+</head>
+<body>
+	<div id="main" class="wrap">	
+
+		<div id="advancedstuff" class="dbx-group datadetail">
+		
+			<fieldset id="new-pic" class="dbx-box">
+				<h3 class="dbx-handle">{gt s = 'Nueva imagen'}</h3>
+				<div class="dbx-content">
+				<form id="frm" enctype="multipart/form-data" action="{$self}" method="POST" onsubmit="return v.exec();">
+					{if $msg}{$msg|wrap}{/if}		
+					<p>
+						<label for="t2">{gt s = 'Tipo'}:</label><br />
+						<select name="t" id="t2">
+							{html_options options = $pfors}
+						</select>
+					</p>
+					
+			
+					<p><label for="name" id="lname">{gt s = 'Nombre'}:</label> <br />
+					<input type="text" name="name" id="name" size="40" maxlength="100" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+			
+					<p><label for="pic" id="lpic">{gt s = 'Foto'}:</label> <br />
+					<input type="file" name="pic" id="pic" size="45" /> <span class="req" title="{gt s = 'Required field'}">*</span></p>
+			
+					<p class="submit">
+						<input type="submit" name="save" id="save" value="{gt s = 'Guardar'}" />
+						<input type="hidden" name="id" id="id" value="0" />
+					</p>
+				</form>
+				</div>			
+			</fieldset>
+		</div>
+			<fieldset id="lista" class="datadetail">
+				<legend>{gt s = 'Fotos existentes'}</legend>
+				
+				<form name="pfrm" id="pfrm" action="{$self}" method="get">
+				<label for="t" class="noblock">{gt s = 'Show Pictures'}:</label>
+					<select name="t" id="t">
+					{html_options selected=$t options=$pfors}
+					</select>
+					<input type="submit" name="psubmit" id="psubmit" value="{gt s = 'Show'}" />
+				</form>
+				
+				<ul id="image-gallery">
+				{section name=p loop=$pictures}
+				<li>
+					<img src="{$picsurl}thumb_{$pictures[p].picname}" alt="{$pictures[p].picname}" /><br />
+					{$pictures[p].name} [<a href="#" onclick="addpictotour({$pictures[p].picid}, 'thumb_{$pictures[p].picname}', '{$pictures[p].name}')">{gt s = 'Add'}</a>]
+				</li>
+				{sectionelse}
+				<p class="acenter">{gt s = 'No hay imágenes que mostrar'}</p>
+				{/section}
+				</ul>
+				
+				<br style="clear:both" />
+				{include file="adm/paginator.html"}
+				<p class="acenter"><input type="button" class="button" value="{gt s = 'Close'}" name="closebutton" id="closebutton" onclick="self.close();" /></p>
+			</fieldset>			
+
+	</div>
+</body>
+</html>

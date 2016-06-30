@@ -1,0 +1,129 @@
+{if $reserve}
+<form action="{$self}" method="post" name="frm" id="frm">
+<fieldset class="datadetail">
+	<legend>{gt s = 'Información Personal'}</legend>
+	{if $msg}{$msg|wrap}{/if}
+	<p>
+		<label id="lrname">{gt s = 'Nombre'}:</label>
+		{$reserve.name}
+	</p>
+	<p>
+		<label id="lremail">{gt s = 'E-Mail'}:</label>
+		{$reserve.email}
+	</p>
+	{if $reserve.city}
+	<p>
+		<label>{gt s = 'Ciudad'}:</label>
+		{$reserve.city}
+	</p>
+	{/if}
+	<p>
+		<label>{gt s = 'País'}:</label>
+		{$reserve.country_name}
+	</p>
+	{if $reserve.phone}
+	<p>
+		<label>{gt s = 'Teléfono'}:</label>
+		{$reserve.phone}
+	</p>
+	{/if}
+	{if $reserve.fax}
+	<p>
+		<label>{gt s = 'Fax'}:</label>
+		{$reserve.fax}
+	</p>
+	{/if}
+</fieldset>
+<fieldset class="datadetail">
+	<legend>{gt s = 'Información de la Reserva'}</legend>
+	{if $reserve.userdata}
+	<p>
+		<label class="noblock">{gt s = 'Referido por'}:</label>
+		<a href="{$admurl}user.php?id={$reserve.userdata.userid}">{$reserve.userdata.name}</a>
+	</p>
+	<p>
+		<label class="noblock">{gt s = 'Comisión'}:</label>
+		US$ {$commission}
+	</p>
+	{/if}
+	<p>
+		<label class="noblock">{gt s = 'Fecha de la reserva'}:</label>
+		{$reserve.freserve|date_format:"%d %B %Y %H:%m"}
+	</p>
+	<p>
+		<label class="noblock">{gt s = 'Fecha de arribo'}:</label>
+		{$reserve.adate|date_format:"%d %B %Y"}
+	</p>
+	<p>
+		<label>{gt s='Cantidad de Paxs'}:</label>
+		{$reserve.adults} {gt s = 'Adultos'}, 
+		{$reserve.children} {gt s = 'Niños'}, 
+		{$reserve.students} {gt s = 'Estudiantes'}
+	</p>
+
+	<p>
+		<label class="noblock">{gt s = 'Tour reservado'}:</label>
+		{$reserve.tourname}
+	</p>
+	<p>
+		<label class="noblock">{gt s = 'Información de hospedaje'}</label>
+		{$lodge_details.lname} US$ {$lodge_details.lprice}
+	</p>
+	<div>
+		<label class="noblock">{gt s = 'Requerimientos adicionales'}:</label>
+		{$reserve.comments}
+	</div>
+	<p class="submit">
+		<input type="submit" name="remove" id="remove" value="{gt s = 'Borrar Reserva'}" onclick="return confirm_msg()" title="{gt s = 'Eliminar'} '{$reserve.name}'" />
+		<input type="button" name="cancel" id="cancel" value="{gt s = 'Cancelar'}" onclick="location.href = '{$self}'" />
+		<input type="hidden" name="action" id="action" value="{$action}" />
+		<input type="hidden" name="id" id="id" value="{$reserve.reserveid}" />
+	</p>
+</fieldset>
+</form>
+{else}
+<form action="{$self}" method="post" name="frm" id="frm">
+<input type="hidden" name="action" id="action" value="{$action}" />
+<input type="hidden" name="id" id="id" value="{$reserve.reserveid}" />
+</form>
+{/if}
+{if $msg}{$msg|wrap}{/if}
+
+<div class="datadetail">
+<table class="datalist" summary="Listado de Reservas" id="lista">
+	<caption>{gt s = 'Lista de Reservas'}</caption>
+	<thead>
+		<tr>
+			<th>{gt s = 'Estado'}</th>
+			<th>{gt s = 'Nombre'}</th>
+			<th>{gt s = 'País'}</th>
+			<th>{gt s = 'Tour'}</th>
+			<th>{gt s = 'Fecha'}</th>
+			<th>{gt s = 'Referido por'}</th>			
+			<th>{gt s = 'Acciones'}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{section name=n loop=$reserves}
+		<tr class="{cycle values="tr01, tr02"}">
+			<td class="{$reserves[n].css_class}">
+				{$reserves[n].status_desc}
+			</td>
+			<td><a href="{$self}?id={$reserves[n].reserveid}" title="{gt s = 'Mostrar'} '{$reserves[n].name}'">{$reserves[n].name}</a></td>
+			<td>{$reserves[n].country}</td>
+			<td>{$reserves[n].tourname}</td>
+			<td>{$reserves[n].freserve|date_format:"%d %B %Y %H:%m"}</td>			
+			<td>{if $reserves[n].username}<a href="{$admurl}user.php?id={$reserves[n].userid}">{$reserves[n].username}</a>{else}{gt s = 'Cliente común'}{/if}</td>			
+			<td class="acenter">
+				<a href="{$self}?id={$reserves[n].reserveid}&amp;remove&amp;{form_token action=remove-booking type=url}" class="delete" title="{gt s = 'Eliminar'} '{$reserves[n].name}'" onclick="return confirm_msg()">{gt s = 'Eliminar'}</a>
+			</td>
+		</tr>
+		{sectionelse}
+		<tr class="tr01">
+			<td colspan="6" class="acenter">{gt s = 'No hay datos que mostrar'}</td>
+		</tr>
+		{/section}
+	</tbody>
+</table>
+{include file="adm/paginator.html"}
+</div>

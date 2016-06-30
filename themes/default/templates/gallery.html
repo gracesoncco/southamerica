@@ -1,0 +1,23 @@
+<h1>{gt s = 'Photo Gallery'}{if $tour}: 
+	<a href="{rewrite_link func=template_tour_url data=$tour lang=$lang}" title="{gt s = 'View details of'} {$tour.name}">{$tour.name}</a>{/if}</h1>
+{if $tour}<p>{$tour.resume}</p>{/if}
+
+<ul style="list-style-type:none;">
+{section name=n loop=$pics}
+	{if $pics[n].pfor != 'm'}
+	<li style="float:left; margin-left: 10px;">
+		<a href="{$picsurl}normal_{$pics[n].picname}" title="{$pics[n].name}" rel="lightbox1">
+		<img src="{$picsurl}thumb_{$pics[n].picname}" alt="{$pics[n].name}" /></a><br />
+		{$pics[n].name}	
+	</li>
+	{/if}
+{sectionelse}
+	<li>{gt s = 'There are no pictures'}</li>
+{/section}
+</ul>
+<br style="clear:both" />
+{include file="adm/paginator.html"}
+
+{if $tour} 
+<p>{gt s = 'Back to the tour'} <a href="{rewrite_link func=template_tour_url data=$tour lang=$lang}" title="{gt s = 'View details of'} {$tour.name}">{$tour.name}</a></p>
+{/if}

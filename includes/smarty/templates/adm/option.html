@@ -1,0 +1,122 @@
+<script type="text/javascript" src="{$media_url}js/tiny_mce/tiny_mce_gzip.php"></script>
+<script type="text/javascript">
+{literal}
+	tinyMCE.init({
+		mode : "exact",
+		elements : "site_footer, signature",
+		textarea_trigger : "title",
+		width : "100%",
+		theme : "advanced",
+		theme_advanced_buttons1 : "bold,italic,strikethrough,separator,bullist,numlist,outdent,indent,separator,justifyleft,justifycenter,justifyright,separator,link,unlink,image,undo,redo,code,search,replace",
+		theme_advanced_buttons2 : "",
+		theme_advanced_buttons3 : "",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_path_location : "bottom",
+		theme_advanced_resizing : true,
+		theme_advanced_resize_horizontal : false,
+		remove_script_host : false,
+		browsers : "msie,gecko,opera",
+		dialog_type : "modal",
+		entity_encoding : "raw",
+		relative_urls : false,
+		force_p_newlines : true,
+		force_br_newlines : false,
+		convert_newlines_to_brs : false,
+		remove_linebreaks : true,
+		plugins: "searchreplace"
+	});
+
+{/literal}
+</script>
+
+{if $msg}{$msg|wrap}{/if}
+
+<form action="{$self}" method="post" name="frm" id="frm">
+	<fieldset class="datadetail">
+	
+	<div class="dbx-group" id="optiondiv">
+	<fieldset class="dbx-box" id="datadiv">
+		<h3 class="dbx-handle">{gt s = 'Información del Sitio'}</h3>
+		<div class="dbx-content">
+		<p><label for="name" id="lname" class="noblock">{gt s = 'Nombre del Sitio'}:</label> <br />
+		<input type="text" name="name" id="name" value="{$options.name}" size="40" class="ohp" /> <span class="req" title="{gt s = 'Campo requerido'}">*</span></p>
+		<p><label for="slogan" id="lslogan" class="noblock">{gt s = 'Eslogan'}:</label><br /> 
+		<textarea name="slogan" id="slogan" cols="45" rows="6" class="ohp">{$options.slogan}</textarea> <span class="req" title="{gt s = 'Campo requerido'}">*</span></p>
+		</div>
+	</fieldset>
+	<fieldset class="dbx-box" id="contactdiv">
+		<h3 class="dbx-handle">{gt s = 'Información de Contacto'}</h3>
+		<div class="dbx-content">
+		<p><label for="site_admin" id="lsiteadmin" class="noblock">{gt s = 'Administrador del Sitio'}:</label> <br />
+		<input type="text" name="site_admin" id="site_admin" value="{$options.site_admin}" size="40" class="ohp" /> <span class="req" title="{gt s = 'Campo requerido'}">*</span></p>
+		<p><label for="site_mail" id="lsitemail" class="noblock">{gt s = 'E-mail principal'}:</label> <br />
+		<input type="text" name="site_mail" id="site_mail" value="{$options.site_mail}" size="40" class="ohp" /> <span class="req" title="{gt s = 'Campo requerido'}">*</span></p>
+		<p><label for="signature" id="lsignature" class="noblock">{gt s = 'Firma'}:</label><br /> 
+		<textarea name="signature" id="signature" cols="45" rows="6" class="ohp">{$options.signature|escape:html}</textarea></p>
+		</div>
+	</fieldset>
+	<fieldset class="dbx-box" id="tecnic-box">
+		<h3 class="dbx-handle">{gt s = 'Datos técnicos'}</h3>
+		<div class="dbx-content">
+		<div id="your-profile">
+		<fieldset>
+			<p>
+			<label for="default_destination" class="noblock">{gt s = 'Destino prederminado'}:</label><br />
+			<select name="default_destination" id="default_destination">
+				{html_options options=$destinations selected=$options.default_destination display_m=name value_m=destid}
+			</select>
+			</p>
+			
+			<p>
+				<label for="default_lang" class="noblock">{gt s = 'Lenguaje predeterminado'}:</label><br />
+				<select name="default_lang" id="default_lang">
+				{html_options options=$langs selected=$options.default_lang display_m=lang_name value_m=lang_code}
+				</select>
+			</p>
+			
+			<p>
+				<input type="checkbox" style="width: 20px;" id="user_agent_language" name="user_agent_language" {if $options.user_agent_language}checked="checked"{/if} />  
+				<label class="noblock" for="user_agent_language">{gt s = 'Mostrar páginas según idioma del navegador del cliente'}*</label>
+			</p>			
+			
+			<p>*: Internet Explorer, Firefox, etc.</p>
+		</fieldset>
+		<fieldset>
+			<p>
+				<label for="default_country">{gt s='País predeterminado'}</label><br />
+				<select name="default_country" id="default_country">
+					{html_options options=$countries selected=$options.default_country}
+				</select>
+			</p>
+			<p>
+				<label for="meta_tags" id="lmetatags" class="noblock">Meta Tags:</label><br /> 
+				<textarea name="meta_tags" id="meta_tags" cols="45" rows="6" class="ohp">{$options.meta_tags}</textarea>
+			</p>
+			
+		</fieldset>
+		</div>
+
+		<br style="clear:left;" />
+		<p><label for="site_footer" id="lfooter" class="noblock">{gt s = 'Pie de página'}:</label><br /> 
+		<textarea name="site_footer" id="site_footer" cols="45" rows="6" class="ohp">{$options.site_footer|escape:html}</textarea></p>
+		</div>
+	</fieldset>	
+	<fieldset class="dbx-box" id="comment-box">
+		<h3 class="dbx-handle">{gt s = 'Comentarios y Notificaciones'}</h3>		
+		<div class="dbx-content">
+		<p><input type="checkbox" id="send_book_notification" name="send_book_notification" {if $options.send_book_notification}checked="checked"{/if} />  
+			<label for="send_book_notification">{gt s = 'Enviar una notificación al recibir una nueva reserva'}.</label></p>
+			
+		<p><input type="checkbox" id="send_comment_notification" name="send_comment_notification" {if $options.send_comment_notification}checked="checked"{/if} />  
+			<label class="noblock" for="send_comment_notification">{gt s = 'Enviar una notificación al recibir un nuevo comentario'}.</label></p>
+		</div>
+	</fieldset>
+	</div>
+	<p class="submit">
+		<input type="submit" name="save" id="save" value="{gt s = 'Guardar Opciones'}" class="bold" />
+		{form_token action=update-options}
+	</p>
+	<div id="grabit" class="dbx-group"></div>
+	</fieldset>
+</form>

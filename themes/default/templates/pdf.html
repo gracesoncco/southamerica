@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{$lang}" xml:lang="{$lang}">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{$theme_url}print.css" />
+	<title>{$section_title}</title>
+</head>
+<body>
+	<div id="header">
+		<h1 id="logo"><a href="{$baseurl}"><span>{$site_name}</span></a></h1>
+		<h2>{$site_slogan}</h2>
+	</div>
+	<div id="main">
+		<div id="content">
+			<h1>{$tour_locale.name} <acronym title="United States Dollar" lang="en">US$</acronym> {$tour.price}</h1>
+			<div id="tour-meta">
+				{if $tour_locale.pictures}
+				<div id="tour-pictures">
+				{section name=tp loop=$tour_locale.pictures}
+				<p class="thumbpicitem">
+					<img src="{$picsurl}thumb_{$tour_locale.pictures[tp].picname}" alt="{$tour_locale.pictures[tp].name}" /><br />
+					{$tour_locale.pictures[tp].name}
+				</p>
+				{/section}
+				</div>
+				{/if}
+			</div>
+			<div id="tour-info">
+			<dl id="data">
+				<dt>Tipo de Tour:</dt>
+				<dd><a href="{$baseurl}tour-is/{$tour_locale.tourtype.link}/{$lang}/">{$tour_locale.tourtype.name}</a></dd>
+				<dt>Código:</dt>
+				<dd>{$tour.code}</dd>
+				<dt>Destinos visitados:</dt>
+				<dd>
+					{section name=otd loop=$tour_locale.destinations}<a href="{$baseurl}tour-in/{$tour_locale.destinations[otd].link}/{$lang}/">{$tour_locale.destinations[otd].name}</a>, {/section}
+				</dd>
+			</dl>
+			<h2 id="resume">Resumen</h2>
+			<p>
+			{$tour_locale.resume}
+			</p>
+			<h2 id="itinerary">Itinerario</h2>
+			{$tour_locale.itinerary}
+			<h2 id="include">Incluye</h2>
+			{$tour_locale.include}
+			<h2 id="notinclude">No incluye</h2>
+			{$tour_locale.notinclude}
+			{if $tour_locale.notes}
+			<h2 id="notes">Notas</h2>
+			<p>
+			{$tour_locale.notes}
+			</p>
+			{/if}
+			{if $prices}
+			<h2 id="hotels">Hoteles</h2>
+			<ul>
+				{if $prices.price2}<li><strong>{$prices.name2}</strong> US${$prices.price2}</li>{/if}
+				{if $prices.price3}<li><strong>{$prices.name3}</strong> US${$prices.price3}</li>{/if}
+				{if $prices.price4}<li><strong>{$prices.name4}</strong> US${$prices.price4}</li>{/if}
+				{if $prices.price5}<li><strong>{$prices.name5}</strong> US${$prices.price5}</li>{/if}
+			</ul>
+			{/if}
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		{include file="footer.html"}
+	</div>
+</body>
+</html>

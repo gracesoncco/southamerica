@@ -1,0 +1,54 @@
+<form action="{$self}" method="post" name="frm" id="frm" onsubmit="return v.exec()">
+	<fieldset class="datadetail">		
+		{if $msg}{$msg|wrap}{/if}
+		{if $tourtype}
+		<p><strong>{gt s = 'Agregar descripción en'}</strong>:
+			{section name=nl loop=$tourtype.langs}
+				<a href="{$page_name}.php?id={$tourtype.typeid}&amp;lang={$tourtype.langs[nl].lang_code}" class="{$tourtype.langs[nl].filled}">{$tourtype.langs[nl].name}</a>,
+			{/section}
+		</p>
+		{/if}
+		
+		<p><label for="lang">{gt s = 'Idioma'}:</label><br />
+		<select name="lang" id="lang">
+			{html_options options=$active_langs selected=$lang display_m=lang_name value_m=lang_code}
+		</select>
+		</p>
+		<p><label for="name" id="lname">{gt s = 'Nombre'}:</label><br />
+		<input type="text" name="name" id="name" value="{$tourtype.name}" size="40" maxlength="100" /> <span class="req" title="{gt s = 'Campo requerido'}">*</span></p>		
+
+		<p class="submit">
+			<input type="submit" name="save" id="save" class="bold" value="{gt s = 'Guardar Tipo'}" />
+			{if $tourtype}
+			<input type="submit" name="remove" id="remove" value="{gt s = 'Eliminar Tipo'}" onclick="return confirm_msg()" />
+			{/if}
+			<input type="hidden" name="action" id="action" value="{$action}" />
+			<input type="hidden" name="id" id="id" value="{$tourtype.typeid}" />
+		</p>
+	</fieldset>
+</form>
+<div class="datadetail">
+<p class="updated">
+{gt s='Los enlaces de color <span class="filled">azul</span> indican que el texto existe en ese idioma, caso contrario el enlace aparecerá de color <span class="unfilled">naranja</span>.'}
+</p>
+</div>
+<script type="text/javascript">
+	document.getElementById('name').focus();
+	{literal}
+	var a_fields = {
+		'name': {
+			{/literal}
+			'l': '{gt s = 'Nombre'}',  // label
+			{literal}
+			'r': true,    // required
+			't': 'lname',   // id of the element to highlight if input not validated
+			'mn': 2
+		}
+	},
+	o_config = {
+		'to_disable' : ['save'],
+		'alert' : 0
+	}
+	var v = new validator('frm', a_fields, o_config);
+	{/literal}
+</script>

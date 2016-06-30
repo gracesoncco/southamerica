@@ -1,0 +1,17 @@
+<p>{gt s='Hi'} {$dname}</p>
+
+<p>{$fname} {gt s='recommends you this tour'}: "<a href="{rewrite_link func=template_tour_url data=$tour lang=$lang}">{$tour.name}</a>"</p>
+
+{$personal|autop}
+--
+
+<h2><a href="{rewrite_link func=template_tour_url data=$tour lang=$lang}">{$tour.name}</a></h2>
+
+{$tour.resume|autop}
+
+<p>{gt s='If you do not see the url, you can copy this url into your address bar:'}
+{rewrite_link func=template_tour_url data=$tour lang=$lang}
+</p>
+
+<p>--<br />
+{$site_footer}</p>

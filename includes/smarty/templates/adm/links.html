@@ -1,0 +1,10 @@
+{if $has_tabs}		
+		<div id="actionbar">			
+			<span id="innav">
+			<a href="{$page_name}.php" id="new_item" style="margin-left: 20%;">{gt s = 'Nuevo'}</a>
+			{if $has_tabs !== 1}
+			<a href="{$page_name}-list.php" id="list_item">{gt s = 'Ver lista'}</a>
+			{/if}
+			</span>
+		</div>
+{/if}

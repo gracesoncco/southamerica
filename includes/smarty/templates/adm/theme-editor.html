@@ -1,0 +1,48 @@
+
+{if $msg}{$msg|wrap}{/if}
+
+<p>{gt s='Ruta actual'}: <strong>{$current_path}</strong> <br />
+{gt s='Ver'}: 
+{foreach from=$active_langs item=lang}
+<a href="{$self}?lang={$lang.lang_code}&amp;file={$current_file.parent}">{$lang.lang_name}</a> 
+{/foreach} <a href="{$self}?file={$current_file.parent}">Todos los archivos</a></p>
+
+
+<div id="templateside">
+<h3>{gt s='Archivos a editar'}</h3>
+
+<ul>
+	<li><a href="{$self}?file=/" class="bold">Directorio Superior</a></li>
+{section name=n loop=$files}
+	<li><a href="{$self}?file={$files[n].path}{$filter_lang}">{$files[n].filename}</a></li>
+{/section}
+</ul>
+
+</div>
+
+<form name="template" id="template" action="{$self}" method="post">
+
+<div>
+<textarea cols="70" rows="25" name="newcontent" id="newcontent" tabindex="1">{$current_file.contents|escape}</textarea>
+</div>
+<p class="submit">
+	<input type="submit" name="save" value="{gt s='Actualizar Archivo'}" class="bold" />
+	<input type="submit" name="delete" value="{gt s='Eliminar Archivo'}" onclick="return confirm_msg();" />
+	<input type="hidden" name="file" value="{$current_file.path}" />
+	{form_token action=update}
+</p>
+</form>
+
+<form id="newfile" action="{$self}" method="post">
+<p>
+	<label for="newfile">{gt s='Nombre:'}</label>
+	<input type="text" name="newfile" id="newfile" size="30" />
+</p>
+<p class="submit">
+	<input type="submit" name="create" value="{gt s='Crear nuevo archivo'}" class="bold" /> ({gt s='Ruta actual'}: <strong>{$current_path}</strong>)
+	<input type="hidden" name="file" value="{$current_file.path}" />
+	{form_token action=create}
+</p>
+</form>
+
+<br class="clear"/>

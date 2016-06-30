@@ -1,0 +1,41 @@
+<div class="datadetail">
+<table class="datalist" summary="Listado de Destinos de los Tours" id="lista">
+	<caption>{gt s = 'Lista de destinos'}</caption>
+	<thead>
+		<tr>
+			<th>{gt s = 'Nombre'}</th>
+			<th>{gt s = 'Idiomas'}</th>
+			<th>{gt s = 'Acciones'}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{section name=n loop=$destinations}
+		<tr class="{cycle values="tr01, tr02"}">
+			<td><a href="{$page_name}.php?id={$destinations[n].destid}" title="{gt s = 'Editar'} '{$destinations[n].name}'">{$destinations[n].name}</a></td>
+			<td>
+				{section name=nl loop=$destinations[n].langs}
+					<a href="{$page_name}.php?id={$destinations[n].destid}&amp;lang={$destinations[n].langs[nl].lang_code}" class="{$destinations[n].langs[nl].filled}">{$destinations[n].langs[nl].name}</a>,
+				{/section}
+			</td>
+			<td class="acenter">
+				{if $destinations[n].destid != $default_destination}
+				<a href="{$self}?id={$destinations[n].destid}&amp;remove&amp;{form_token type=url action=delete-destination}" class="delete" title="{gt s = 'Eliminar'} '{$destinations[n].name}'" onclick="return confirm_msg()">{gt s = 'Eliminar'}</a>
+				{else}
+				{gt s = 'Predeterminado'}
+				{/if}
+			</td>
+		</tr>
+		{sectionelse}
+		<tr class="tr01">
+			<td colspan="2" class="acenter">{gt s = 'No hay datos que mostrar'} [<a href="{$page_name}.php">{gt s = 'Añadir uno nuevo'}</a>]</td>
+		</tr>
+		{/section}
+	</tbody>
+</table>
+{include file="adm/paginator.html"}
+</div>
+<div class="datadetail">
+<p class="updated">
+	Los enlaces de color <span class="filled">azul</span> indican que el texto existe en ese idioma, caso contrario el enlace aparecerá de color <span class="unfilled">naranja</span>.
+</p>
+</div>

@@ -1,0 +1,11 @@
+<p>Dear <strong>{$name}</strong>, thank you for your reservation</p>
+<h1>Description</h1>
+<p>You reserved: <strong><a href="{rewrite_link func=template_tour_url data=$tour lang=$tour.lang_code}">{$tour.name}</a> ({$lodge_details.lname})</strong></p>
+<p>Total Price: <strong>US$ {$lodge_details.lprice}</strong></p>
+<p>For reconfirm your reservation and pay online:<br />
+<a href="{$baseurl}payment.php?r={$presell.reservecod}&amp;lang={$tour.lang_code}">{$baseurl}payment.php?lang={$tour.lang_code}&amp;r={$presell.reservecod}</a></p>
+<p>If the link doesn't work, your reservation code is <strong>{$presell.reservecod}</strong> copy your code and click<br />
+<a href="{$baseurl}payment.php">{$baseurl}payment.php</a></p>
+<p>If the links doesn't work, copy and paste in your browser.</p>
+<p>Greetings</p>
+<p>{$signature}</p>

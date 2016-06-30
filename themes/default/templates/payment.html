@@ -1,0 +1,80 @@
+<h1>
+	{gt s = 'Secure Payments'}
+</h1>
+{if !$presell}
+<form action="{$self}" method="post" id="frm" onsubmit="return v.exec()">
+	<fieldset>
+		<legend>{gt s = 'Reservation Information'}</legend>
+		{if $msg}{$msg|wrap}{/if}
+		<p><label for="r" id="lname" class="noblock">{gt s = 'Pre Sale Code'}:</label> <br />
+		<input type="text" name="r" id="r" size="40" maxlength="32" /></p>
+		
+		<p class="button">
+			<input type="submit" name="view" id="view" value="{gt s = 'Show'}" />
+		</p>
+	</fieldset>
+</form>
+<script type="text/javascript">
+	document.getElementById('r').focus();
+	{literal}
+	var a_fields = {
+		'r': {
+			{/literal}
+			'l': '{gt s = 'Pre Sale Code'}',  // label
+			{literal}
+			'r': true,    // required
+			't': 'lname',   // id of the element to highlight if input not validated
+			'mn': 32
+		}
+	},
+	o_config = {
+		'to_disable' : ['view'],
+		'alert' : 0
+	}
+	var v = new validator('frm', a_fields, o_config);
+	{/literal}
+</script>
+{else}
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" id="frm">
+	<fieldset>
+	<legend>{gt s = 'Personal Information'}</legend>
+	<p>
+		<label class="noblock">{gt s = 'Name'}:</label> {$presell.name}
+	</p>
+	<p>
+		<label class="noblock">{gt s = 'E-Mail'}:</label> {$presell.email}
+	</p>
+</fieldset>
+<fieldset>
+	<legend>{gt s = 'Pre Sale Details'}</legend>
+	<p>
+		<label class="noblock">{gt s = 'Arrival Date'}:</label> {$presell.adate|date_format:"%d %B %Y"}
+	</p>
+	<p><label class="noblock">{gt s = 'Description'}:</label>
+	</p>
+	<div id="descserv">{$presell.descserv}</div>
+	<p><label for="total" class="noblock" id="ltotal">{gt s = 'Total US$'}:</label><br />
+	{$presell.total}
+	</p>
+	
+	<p>	
+		<input type="radio" name="amount" value="{$presell.total}" id="total" checked="checked" /> <label for="total" class="noblock">{gt s = 'Pay the full amount of your reservation'}: <strong>US$ {$presell.total}</strong></label><br />
+		{if $presell.quota}
+		<input type="radio" name="amount" value="{$presell.quota}" id="total40" /> <label for="total40" class="noblock"><strong>{$presell.quota_desc}</strong></label>
+		{/if}
+	</p>
+	
+	<p class="acenter">
+		<input type="hidden" name="cmd" value="_xclick" />
+		<input type="hidden" name="business" value="{$account}" />
+		<input type="hidden" name="item_name" value="Tour {gt s = 'in'} {$site_name} Nro:{$presell.reservecod}" />
+		<input type="hidden" name="item_number" value="{$presell.reservecod}" />
+		<input type="hidden" name="no_note" value="1" />
+		<input type="hidden" name="currency_code" value="USD" />
+		<!-- <input type="hidden" name="return" value="{$baseurl}thankyou.php" /> -->
+		<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but6.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />	
+		
+	</p>
+</fieldset>
+</form>
+{/if}
