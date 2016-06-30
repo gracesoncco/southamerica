@@ -26,10 +26,7 @@ class db {
 	 * @param string $dbname
 	 * @param string $dbhost
 	 */
-	function db($dbuser, $dbpassword, $dbname, $dbhost) {
-		return $this->__construct($dbuser, $dbpassword, $dbname, $dbhost);
-	}
-	
+
 	function __construct($dbuser, $dbpassword, $dbname, $dbhost) {
 		register_shutdown_function(array(&$this, "__destruct"));
 
