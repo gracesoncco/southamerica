@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.10, created on 2010-02-12 06:07:22
+<?php /* Smarty version 2.6.10, created on 2016-07-01 00:29:55
          compiled from adm/tour-list.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'gt', 'adm/tour-list.html', 6, false),array('function', 'cycle', 'adm/tour-list.html', 22, false),array('function', 'form_token', 'adm/tour-list.html', 29, false),)), $this); ?>

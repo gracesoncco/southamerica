@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.10, created on 2010-02-12 06:06:59
+<?php /* Smarty version 2.6.10, created on 2016-07-01 00:29:38
          compiled from adm/nav.html */ ?>
 <ul id="adminmenu">
 <?php $_from = $this->_tpl_vars['admin_menu']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):

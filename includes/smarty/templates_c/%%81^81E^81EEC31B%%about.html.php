@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.10, created on 2010-02-15 10:42:07
+<?php /* Smarty version 2.6.29, created on 2016-07-01 00:38:15
          compiled from adm/about.html */ ?>
 <div id="zeitgeist">
 	<h2>Noticias</h2>

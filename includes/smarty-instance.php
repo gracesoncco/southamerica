@@ -24,7 +24,7 @@ class TawaSmarty extends Smarty {
 			}
 		}
 		else {
-			$smarty->template_dir = INCLUDE_PATH . 'smarty/templates';
+			$this->template_dir = INCLUDE_PATH . 'smarty/templates';
 		}
 	}
 	

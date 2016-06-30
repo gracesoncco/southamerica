@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.10, created on 2010-02-13 06:14:33
+<?php /* Smarty version 2.6.29, created on 2016-07-01 00:37:57
          compiled from adm/tour.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'gt', 'adm/tour.html', 37, false),array('function', 'html_options', 'adm/tour.html', 40, false),array('function', 'form_token', 'adm/tour.html', 119, false),array('modifier', 'wrap', 'adm/tour.html', 100, false),)), $this); ?>
@@ -113,7 +113,7 @@ $this->_sections['td']['last']       = ($this->_sections['td']['iteration'] == $
 ?>
 					<input type="checkbox" name="tdestinations[]" id="dest_<?php echo $this->_tpl_vars['destinations'][$this->_sections['td']['index']]['destid']; ?>
 " value="<?php echo $this->_tpl_vars['destinations'][$this->_sections['td']['index']]['destid']; ?>
-" <?php if ($this->_tpl_vars['destinations'][$this->_sections['td']['index']]['active']): ?>checked="checked"<?php endif;  if (! $this->_tpl_vars['tour'] && $this->_tpl_vars['default_destination'] == $this->_tpl_vars['destinations'][$this->_sections['td']['index']]['destid']): ?>checked="checked"<?php endif; ?> />
+" <?php if ($this->_tpl_vars['destinations'][$this->_sections['td']['index']]['active']): ?>checked="checked"<?php endif; ?><?php if (! $this->_tpl_vars['tour'] && $this->_tpl_vars['default_destination'] == $this->_tpl_vars['destinations'][$this->_sections['td']['index']]['destid']): ?>checked="checked"<?php endif; ?> />
 					<label for="dest_<?php echo $this->_tpl_vars['destinations'][$this->_sections['td']['index']]['destid']; ?>
 " class="noblock"><?php echo $this->_tpl_vars['destinations'][$this->_sections['td']['index']]['name']; ?>
 </label><br />
@@ -179,7 +179,8 @@ $this->_sections['nl']['last']       = ($this->_sections['nl']['iteration'] == $
 		<?php endif; ?>
 </fieldset>
 
-<?php if ($this->_tpl_vars['msg']):  echo ((is_array($_tmp=$this->_tpl_vars['msg'])) ? $this->_run_mod_handler('wrap', true, $_tmp) : smarty_modifier_wrap($_tmp));  endif; ?>
+<?php if ($this->_tpl_vars['msg']): ?><?php echo ((is_array($_tmp=$this->_tpl_vars['msg'])) ? $this->_run_mod_handler('wrap', true, $_tmp) : smarty_modifier_wrap($_tmp)); ?>
+<?php endif; ?>
 
 <fieldset id="titlediv">
 	<p>
@@ -354,7 +355,8 @@ $this->_sections['pd']['last']       = ($this->_sections['pd']['iteration'] == $
 							<div id="input<?php echo $this->_tpl_vars['tour']['tourid']; ?>
 -<?php echo $this->_tpl_vars['pdfs'][$this->_sections['pd']['index']]['lang']; ?>
 ">
-							<a href="<?php echo $this->_tpl_vars['pdfsurl'];  echo $this->_tpl_vars['pdfs'][$this->_sections['pd']['index']]['file']; ?>
+							<a href="<?php echo $this->_tpl_vars['pdfsurl']; ?>
+<?php echo $this->_tpl_vars['pdfs'][$this->_sections['pd']['index']]['file']; ?>
 " class="pdf" target="_blank"><?php echo $this->_tpl_vars['pdfs'][$this->_sections['pd']['index']]['file']; ?>
 </a>
 							<a href="<?php echo $this->_tpl_vars['self']; ?>

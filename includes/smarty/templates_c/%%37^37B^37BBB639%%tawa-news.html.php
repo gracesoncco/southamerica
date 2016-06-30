@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.10, created on 2010-02-13 05:47:05
+<?php /* Smarty version 2.6.29, created on 2016-07-01 00:38:08
          compiled from adm/tawa-news.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'gt', 'adm/tawa-news.html', 4, false),array('function', 'cycle', 'adm/tawa-news.html', 11, false),)), $this); ?>

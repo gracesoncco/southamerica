@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.10, created on 2010-02-12 05:09:30
+<?php /* Smarty version 2.6.10, created on 2016-07-01 00:17:09
          compiled from login.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'gt', 'login.html', 6, false),array('modifier', 'wrap', 'login.html', 7, false),)), $this); ?>

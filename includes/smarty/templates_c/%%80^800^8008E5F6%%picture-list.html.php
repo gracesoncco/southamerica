@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.10, created on 2010-02-12 06:07:46
+<?php /* Smarty version 2.6.29, created on 2016-07-01 00:38:03
          compiled from adm/picture-list.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'gt', 'adm/picture-list.html', 4, false),array('function', 'html_options', 'adm/picture-list.html', 6, false),)), $this); ?>
@@ -81,7 +81,8 @@ admin/images/delete.png" alt="<?php echo $this->_tpl_vars['pictures'][$this->_se
 
 </p>
 </div>
-<?php endif;  $_smarty_tpl_vars = $this->_tpl_vars;
+<?php endif; ?>
+<?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "adm/paginator.html", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);

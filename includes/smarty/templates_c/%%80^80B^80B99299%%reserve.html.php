@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.10, created on 2010-02-12 06:19:06
+<?php /* Smarty version 2.6.10, created on 2016-07-01 00:35:31
          compiled from adm/reserve.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'gt', 'adm/reserve.html', 4, false),array('function', 'cycle', 'adm/reserve.html', 108, false),array('function', 'form_token', 'adm/reserve.html', 118, false),array('modifier', 'wrap', 'adm/reserve.html', 5, false),array('modifier', 'date_format', 'adm/reserve.html', 51, false),)), $this); ?>

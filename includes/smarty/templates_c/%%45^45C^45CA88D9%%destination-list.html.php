@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.10, created on 2010-02-12 06:06:59
+<?php /* Smarty version 2.6.29, created on 2016-07-01 00:38:01
          compiled from adm/destination-list.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'gt', 'adm/destination-list.html', 3, false),array('function', 'cycle', 'adm/destination-list.html', 13, false),array('function', 'form_token', 'adm/destination-list.html', 22, false),)), $this); ?>
