@@ -20,7 +20,7 @@ function smarty_function_rewrite_link($params, &$smarty)
 	}
 	$url = '#';
 	if (!empty( $params['data'] ) && !empty( $params['func'] ) && function_exists($params['func']))
-		$url = call_user_func_array($params['func'], array($params['data'], $params['lang']));
+		$url = call_user_func_array($params['func'], array(&$params['data'], &$params['lang']));
 
 	return $url;
 }
