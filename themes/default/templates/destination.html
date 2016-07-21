@@ -1,12 +1,10 @@
 <h1>{$section_title}</h1>
 
 {section name=n loop=$destinations}
-<div class="borde">
-<p>
-	<h3><a href="{$baseurl}{$destinations[n].link}-information.{$lang}.html">{$destinations[n].name}</a></h3>
-	<a href="{rewrite_link func=template_destination_url data=$destinations[n] lang=$lang}">
-		
-	</a>
-	{$destinations[n].description}</p>
+<div class="borde">  
+  <h3>
+    <a href="{$baseurl}{$destinations[n].link}-information.{$lang}.html">{$destinations[n].name}</a>
+  </h3>
+   {$destinations[n].description} 
 </div>
 {/section}

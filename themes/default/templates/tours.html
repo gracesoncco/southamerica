@@ -1,23 +1,19 @@
 {if $destination}
-	{if $destination.description!=''}
-		<h1 id="infode"><a href="{$baseurl}{$destination.link}-information.{$lang}.html">{$destination.name}</a></h1>
-		
+  {if $destination.description!=''}
+    <h1 id="infode"><a href="{$baseurl}{$destination.link}-information.{$lang}.html">{$destination.name}</a></h1>
 
-
-
-
-				{$destination.description}
-		<p><a href="{$baseurl}{$destination.link}-information.{$lang}.html">{gt s = 'More'} &rarr;</a></p>
-		<h1 id="tours-in">{gt s = 'Tours in'} {$destination.name}</h1>
-	{else}
-		<h1>{gt s = 'Tours in'} {$destination.name}</h1>
-	{/if}
+        {$destination.description}
+    <p><a href="{$baseurl}{$destination.link}-information.{$lang}.html">{gt s = 'More'} &rarr;</a></p>
+    <h1 id="tours-in">{gt s = 'Tours in'} {$destination.name}</h1>
+  {else}
+    <h1>{gt s = 'Tours in'} {$destination.name}</h1>
+  {/if}
 {elseif $tourtype}
-	<h1>{gt s = 'Tour Packages'}: '{$tourtype.name}'</h1>
+  <h1>{gt s = 'Tour Packages'}: '{$tourtype.name}'</h1>
 {elseif $search_term}
-	<h1>{gt s = 'Search results for'}: {$search_term}</h1>	
+  <h1>{gt s = 'Search results for'}: {$search_term}</h1>  
 {else}
-	<h1>{gt s = 'Our Tours'}</h1>
+  <h1>{gt s = 'Our Tours'}</h1>
 {/if}
 {include file="adm/paginator.html"}
 {include file="tour-results.html"}
