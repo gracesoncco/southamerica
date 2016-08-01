@@ -1,36 +1,36 @@
 {if $tours}
-	{section name=ot loop=$tours}		
-		<h2><a href="{rewrite_link func=template_tour_url data=$tours[ot] lang=$lang}">{$tours[ot].name}</a> 
-		{if $tours[ot].price > 0}(<acronym title="United States Dollar" lang="en">US$</acronym> {$tours[ot].price}){/if}</h2>
-		<p>
-			{gt s = 'Visited Destinations'}: 
-				{section name=otd loop=$tours[ot].destinations}
-				<a href="{rewrite_link func=template_destination_url data=$tours[ot].destinations[otd] lang=$lang}">{$tours[ot].destinations[otd].name}</a> 
-				{/section}
-		</p>
-		<p>		
-		{if $tours[ot].pictures}
-			<a href="{rewrite_link func=template_tour_url data=$tours[ot] lang=$lang}">
-			<img {random_image pics=$tours[ot].pictures no_tag=true}" class="foto_tour"/>
-			</a>
-			{/if}
+  {section name=ot loop=$tours}
+    <h2><a href="{rewrite_link func=template_tour_url data=$tours[ot] lang=$lang}">{$tours[ot].name}</a> 
+    {if $tours[ot].price > 0}(<acronym title="United States Dollar" lang="en">US$</acronym> {$tours[ot].price}){/if}</h2>
+    <p>
+      {gt s = 'Visited Destinations'}: 
+        {section name=otd loop=$tours[ot].destinations}
+        <a href="{rewrite_link func=template_destination_url data=$tours[ot].destinations[otd] lang=$lang}">{$tours[ot].destinations[otd].name}</a> 
+        {/section}
+    </p>
+    <div class="row">
+        <div class="col-md-3">
+            {if $tours[ot].pictures}
+          <a href="{rewrite_link func=template_tour_url data=$tours[ot] lang=$lang}">
+          <img {random_image pics=$tours[ot].pictures no_tag=true} class="foto_tour"/>
+          </a>
+          {/if}
+        </div>
+        <div class="col-md-9">
+            {$tours[ot].resume|trim_text|autop}
+        
+        </div>
+    </div> 
+    <p>
+      <a href="{rewrite_link func=template_book_url data=$tours[ot] lang=$lang}" title="{gt s = 'Reserve'} {$tours[ot].name}">{gt s = 'Book Now'}</a> |
+      <a href="{rewrite_link func=template_tour_url data=$tours[ot] lang=$lang}">{gt s = 'More'} &rarr;</a>
+    </p> 
+    <br />
+    <hr />
+  {/section}
 
+  {include file="adm/paginator.html"}
 
-
-
-			{$tours[ot].resume|trim_text|autop}			
-		
-		</p>		
-		<p>
-			<a href="{rewrite_link func=template_book_url data=$tours[ot] lang=$lang}" title="{gt s = 'Reserve'} {$tours[ot].name}">{gt s = 'Book Now'}</a> |
-			<a href="{rewrite_link func=template_tour_url data=$tours[ot] lang=$lang}">{gt s = 'More'} &rarr;</a>
-		</p> 
-		<br />
-		<hr />
-	{/section}
-
-	{include file="adm/paginator.html"}
-
-	{else}
-	<p>{gt s = 'There are no available Tours'}</p>
+  {else}
+  <p>{gt s = 'There are no available Tours'}</p>
 {/if}

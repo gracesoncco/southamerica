@@ -3,32 +3,32 @@
 <form action="{$self}" method="post" 	id="frm" onsubmit="return v.exec()">
 <fieldset>
 	<legend>{gt s = 'Personal Information'}</legend>
-	<p>
+	<div class="form-group">
 		<label for="rname" id="lrname" class="noblock">{gt s = 'Name'}:</label><br />
-		<input type="text" id="rname" name="rname" size="40" /> <span class="req" title="{gt s = 'Required field'}">*</span>
-	</p>
-	<p>
+		<input type="text" id="rname" name="rname"  class="form-control" /> 
+	</div>
+  <div class="form-group">
 		<label for="remail" id="lremail" class="noblock">{gt s = 'e-Mail'}:</label><br />
-		<input type="text" id="remail" name="remail" size="40" /> <span class="req" title="{gt s = 'Required field'}">*</span>
-	</p>
-	<p>
+		<input type="text" id="remail" name="remail" class="form-control"/> 
+	</div>
+	<div class="form-group">
 		<label for="rctry" class="noblock">{gt s = 'Country'}:</label><br />
-		<select name="rctry" id="rctry">
+		<select name="rctry" id="rctry" class="form-control">
 			{html_options options=$countries selected=$default_country}
 		</select>
-	</p>
-	<p>
+	</div>
+  <div class="form-group">
 		<label for="rcomm" class="noblock">{gt s = 'Consults, comments or suggestions'}:</label><br />
-		<textarea id="rcomm" name="rcomm" cols="60" rows="7"></textarea>
-	</p>
+		<textarea id="rcomm" name="rcomm" rows="7" class="form-control"></textarea>
+	</div>
 	<p class="button">
-		<input type="submit" name="rsub" id="rsub" value="{gt s = 'Send'}" />
-		<input type="reset" name="reset" id="reset" value="{gt s = 'Reset'}" />
-		<input type="hidden" name="id" id="id" value="{$tour.tourid}" />
+		<input type="submit" name="rsub" id="rsub" value="{gt s = 'Send'}" class="btn btn-success btn-block btn-lg"/>
+			<input type="hidden" name="id" id="id" value="{$tour.tourid}" />
 		<input type="hidden" name="lang" id="lang" value="{$lang}" />
-	</p>
+	</div>
 </fieldset>
 </form>
+
 
 <script type="text/javascript">
 	document.getElementById('rname').focus();
