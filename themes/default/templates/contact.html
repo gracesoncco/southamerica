@@ -1,61 +1,32 @@
 <h1>{if $tour}{gt s = 'Ask for more information about'} <a href="{rewrite_link func=template_tour_url data=$tour lang=$lang}">{$tour.name}</a>{else}{gt s = 'Contact Us'}{/if}</h1>
 
-<form action="{$self}" method="post" 	id="frm" onsubmit="return v.exec()">
+<form action="{$self}" method="post"  id="frm" onsubmit="return v.exec()">
 <fieldset>
-	<legend>{gt s = 'Personal Information'}</legend>
-	<div class="form-group">
-		<label for="rname" id="lrname" class="noblock">{gt s = 'Name'}:</label><br />
-		<input type="text" id="rname" name="rname"  class="form-control" /> 
-	</div>
+  <legend>{gt s = 'Personal Information'}</legend>
   <div class="form-group">
-		<label for="remail" id="lremail" class="noblock">{gt s = 'e-Mail'}:</label><br />
-		<input type="text" id="remail" name="remail" class="form-control"/> 
-	</div>
-	<div class="form-group">
-		<label for="rctry" class="noblock">{gt s = 'Country'}:</label><br />
-		<select name="rctry" id="rctry" class="form-control">
-			{html_options options=$countries selected=$default_country}
-		</select>
-	</div>
+    <label for="rname" id="lrname" class="noblock">{gt s = 'Name'}:</label><br />
+    <input type="text" id="rname" name="rname"  class="form-control" /> 
+  </div>
   <div class="form-group">
-		<label for="rcomm" class="noblock">{gt s = 'Consults, comments or suggestions'}:</label><br />
-		<textarea id="rcomm" name="rcomm" rows="7" class="form-control"></textarea>
-	</div>
-	<p class="button">
-		<input type="submit" name="rsub" id="rsub" value="{gt s = 'Send'}" class="btn btn-success btn-block btn-lg"/>
-			<input type="hidden" name="id" id="id" value="{$tour.tourid}" />
-		<input type="hidden" name="lang" id="lang" value="{$lang}" />
-	</div>
+    <label for="remail" id="lremail" class="noblock">{gt s = 'e-Mail'}:</label><br />
+    <input type="text" id="remail" name="remail" class="form-control"/> 
+  </div>
+  <div class="form-group">
+    <label for="rctry" class="noblock">{gt s = 'Country'}:</label><br />
+    <select name="rctry" id="rctry" class="form-control">
+      {html_options options=$countries selected=$default_country}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="rcomm" class="noblock">{gt s = 'Consults, comments or suggestions'}:</label><br />
+    <textarea id="rcomm" name="rcomm" rows="7" class="form-control"></textarea>
+  </div>
+  <div class="button">
+    <input type="submit" name="rsub" id="rsub" value="{gt s = 'Send'}" class="btn btn-success btn-block btn-lg"/>
+      <input type="hidden" name="id" id="id" value="{$tour.tourid}" />
+    <input type="hidden" name="lang" id="lang" value="{$lang}" />
+  </div>
 </fieldset>
 </form>
 
 
-<script type="text/javascript">
-	document.getElementById('rname').focus();
-	{literal}
-	var a_fields = {
-		'rname': {
-			{/literal}
-			'l': '{gt s = 'Name'}',
-			{literal}
-			'r': true,
-			't': 'lrname',
-			'mn': 4
-		},
-		'remail': {
-			{/literal}
-			'l': '{gt s = 'E-Mail'}',
-			{literal}
-			'r': true,
-			'f': 'email',
-			't': 'lremail',
-			'mn': 4
-		}
-	},
-	o_config = {
-		'to_disable' : ['rsub'],
-		'alert' : 0
-	}
-	var v = new validator('frm', a_fields, o_config);
-	{/literal}
-</script>

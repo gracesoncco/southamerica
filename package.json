@@ -1,0 +1,24 @@
+{
+  "name": "southamerica",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gracesoncco/southamerica.git"
+  },
+  "author": "grace",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gracesoncco/southamerica/issues"
+  },
+  "homepage": "https://github.com/gracesoncco/southamerica#readme",
+  "devDependencies": {
+    "onchange": "^2.5.0",
+    "stylus": "^0.54.5"
+  },
+  "scripts": {
+    "greischafea": "stylus ./themes/default/lib/main.styl -o ./themes/default/css/main.css -c",
+    "mira": "onchange ./themes/default/lib/main.styl  -- npm run greischafea" 
+  }
+}

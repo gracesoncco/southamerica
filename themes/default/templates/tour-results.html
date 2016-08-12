@@ -9,14 +9,20 @@
         {/section}
     </p>
     <div class="row">
+        {if $tours[ot].pictures}
         <div class="col-md-3">
-            {if $tours[ot].pictures}
+          
           <a href="{rewrite_link func=template_tour_url data=$tours[ot] lang=$lang}">
-          <img {random_image pics=$tours[ot].pictures no_tag=true} class="foto_tour"/>
+          <img {random_image pics=$tours[ot].pictures no_tag=true} class="img-thumbnail"/>
           </a>
-          {/if}
         </div>
+        {/if}
+
+        {if $tours[ot].pictures}
         <div class="col-md-9">
+        {else}
+        <div class="col-md-12">
+        {/if}
             {$tours[ot].resume|trim_text|autop}
         
         </div>
