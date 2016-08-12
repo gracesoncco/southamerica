@@ -1,4 +1,5 @@
 includes/smarty/templates_c
 includes/smarty/templates_c/*
 **/templates_c/*
+node_modules
 
